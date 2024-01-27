@@ -352,7 +352,7 @@ height = 0.2
 radius = 0.7
 height = 3.65
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.363859, 0)
 script = ExtResource("1_bdw3y")
 
