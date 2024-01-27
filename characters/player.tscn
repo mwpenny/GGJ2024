@@ -109,7 +109,7 @@ tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.12503, 0, 1, 1, 0, 0.606822, 0, 2, 1, 0, 1.12503, 0)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.489, 0, 1, 1, 0, 0.971, 0, 2, 1, 0, 1.489, 0)
 tracks/2/type = "rotation_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
@@ -212,7 +212,7 @@ tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.20457, 0, 0.5, 1, 0, 1.10377, 0, 1, 1, 0, 1.195, 0, 1.5, 1, 0, 1.10377, 0)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.569, 0, 0.5, 1, 0, 1.468, 0, 1, 1, 0, 1.559, 0, 1.5, 1, 0, 1.468, 0)
 tracks/2/type = "rotation_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
@@ -353,14 +353,13 @@ radius = 0.7
 height = 3.65
 
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.363859, 0)
 script = ExtResource("1_bdw3y")
 
 [node name="Root" type="Node3D" parent="."]
-transform = Transform3D(0.788132, 0.0105745, 0.615416, 0.00310296, 0.999772, -0.0211526, -0.615499, 0.0185807, 0.787919, 0, 1.17572, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.489, 0)
 
 [node name="HeadPivot" type="Node3D" parent="Root"]
-transform = Transform3D(0.876802, 0.0731736, -0.475251, 0, 0.988354, 0.152175, 0.480851, -0.133428, 0.866591, 0.0191801, 0.875566, -0.00105524)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0191801, 0.875566, -0.00105524)
 
 [node name="Head" type="MeshInstance3D" parent="Root/HeadPivot"]
 transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.5941, 0)
@@ -382,7 +381,7 @@ mesh = SubResource("CapsuleMesh_c3pvv")
 skeleton = NodePath("HatEndJoint1/Tube end")
 
 [node name="HatEndJoint1" type="Node3D" parent="Root/HeadPivot/Head/Hat/Tube/Tube base"]
-transform = Transform3D(0.989111, 0.106688, -0.101375, -0.112777, 0.992021, -0.0563484, 0.0945542, 0.0671676, 0.993251, -1.78814e-07, -0.185465, -2.98023e-08)
+transform = Transform3D(1, 4.09782e-08, -2.98024e-08, -4.09782e-08, 1, -2.98024e-08, 2.98024e-08, 2.98024e-08, 1, -1.78814e-07, -0.185465, -2.98023e-08)
 
 [node name="Tube end" type="MeshInstance3D" parent="Root/HeadPivot/Head/Hat/Tube/Tube base/HatEndJoint1"]
 transform = Transform3D(0.318271, -0.709215, 0.629061, 0.91568, 0.401778, -0.010312, -0.24543, 0.579299, 0.777288, -0.165727, 0.162236, 0.135779)
@@ -402,7 +401,7 @@ mesh = SubResource("CapsuleMesh_c3pvv")
 skeleton = NodePath("HatEndJoint2/Tube end")
 
 [node name="HatEndJoint2" type="Node3D" parent="Root/HeadPivot/Head/Hat/Tube2/Tube base"]
-transform = Transform3D(0.989111, 0.106688, -0.101375, -0.112777, 0.992021, -0.0563484, 0.0945542, 0.0671676, 0.993251, -1.19209e-07, -0.185465, 1.78814e-07)
+transform = Transform3D(1, 2.98024e-08, 1.11023e-16, -2.98024e-08, 1, 7.45058e-09, 1.11023e-16, -7.45058e-09, 1, -1.19209e-07, -0.185465, 1.78814e-07)
 
 [node name="Tube end" type="MeshInstance3D" parent="Root/HeadPivot/Head/Hat/Tube2/Tube base/HatEndJoint2"]
 transform = Transform3D(0.318271, -0.709215, 0.629061, 0.91568, 0.401778, -0.010312, -0.24543, 0.579299, 0.777288, -0.165727, 0.162236, 0.135779)
@@ -422,7 +421,7 @@ mesh = SubResource("CapsuleMesh_c3pvv")
 skeleton = NodePath("HatEndJoint3/Tube end")
 
 [node name="HatEndJoint3" type="Node3D" parent="Root/HeadPivot/Head/Hat/Tube3/Tube base"]
-transform = Transform3D(0.989111, 0.106688, -0.101375, -0.112777, 0.992021, -0.0563483, 0.0945543, 0.0671675, 0.993251, 0, -0.185466, 2.38419e-07)
+transform = Transform3D(1, 1.30385e-08, -2.98024e-08, -1.30385e-08, 1, -1.00117e-08, 2.98024e-08, 1.00117e-08, 1, 0, -0.185466, 2.38419e-07)
 
 [node name="Tube end" type="MeshInstance3D" parent="Root/HeadPivot/Head/Hat/Tube3/Tube base/HatEndJoint3"]
 transform = Transform3D(0.318271, -0.709215, 0.629061, 0.91568, 0.401778, -0.010312, -0.24543, 0.579299, 0.777288, -0.165727, 0.162236, 0.135779)
@@ -486,14 +485,14 @@ mesh = SubResource("CylinderMesh_0nu81")
 skeleton = NodePath("../HeadPivot/Head")
 
 [node name="LegLeft" type="Node3D" parent="Root"]
-transform = Transform3D(0.923899, -0.367214, -0.107541, 0.0718228, 0.442487, -0.893894, 0.375836, 0.818144, 0.435188, 0.357306, -0.213354, -0.00192582)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.357306, -0.213354, -0.00192582)
 
 [node name="UpperLeg" type="MeshInstance3D" parent="Root/LegLeft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.204663, 0)
 mesh = SubResource("CapsuleMesh_e4or4")
 
 [node name="LeftKnee" type="Node3D" parent="Root/LegLeft"]
-transform = Transform3D(0.999972, 0.00359555, -0.00655996, -0.0072842, 0.268325, -0.963301, -0.0017034, 0.963322, 0.268344, -2.98023e-08, -0.524515, -0.000249267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98023e-08, -0.524515, -0.000249267)
 
 [node name="LowerLeg" type="MeshInstance3D" parent="Root/LegLeft/LeftKnee"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.222645, 0)
@@ -501,7 +500,7 @@ mesh = SubResource("CapsuleMesh_e4or4")
 skeleton = NodePath("../..")
 
 [node name="LeftAnkle" type="Node3D" parent="Root/LegLeft/LeftKnee/LowerLeg"]
-transform = Transform3D(1, 7.45058e-09, -6.23482e-10, -7.45058e-09, 0.986092, -0.166201, -6.23482e-10, 0.166201, 0.986092, 0, -0.288578, 0.000239015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.288578, 0.000239015)
 
 [node name="Foot" type="MeshInstance3D" parent="Root/LegLeft/LeftKnee/LowerLeg/LeftAnkle"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0984467, 0.13846)
@@ -509,14 +508,14 @@ mesh = SubResource("CapsuleMesh_pvus3")
 skeleton = NodePath("../../../..")
 
 [node name="LegRight" type="Node3D" parent="Root"]
-transform = Transform3D(0.748362, 0.64094, -0.170738, -0.00132391, 0.258853, 0.965917, 0.663291, -0.722629, 0.194564, -0.357, -0.21315, -0.0025289)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.357, -0.21315, -0.0025289)
 
 [node name="UpperLeg" type="MeshInstance3D" parent="Root/LegRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.204663, 0)
 mesh = SubResource("CapsuleMesh_e4or4")
 
 [node name="RightKnee" type="Node3D" parent="Root/LegRight"]
-transform = Transform3D(0.999936, 0.00228193, -0.0111057, -0.00230779, 0.999995, -0.00231638, 0.0111004, 0.00234186, 0.999936, -1.19209e-07, -0.525515, 0.000248671)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, -0.525515, 0.000248671)
 
 [node name="LowerLeg" type="MeshInstance3D" parent="Root/LegRight/RightKnee"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.222645, 0)
@@ -532,7 +531,7 @@ mesh = SubResource("CapsuleMesh_pvus3")
 skeleton = NodePath("../../../..")
 
 [node name="LeftArm" type="Node3D" parent="Root"]
-transform = Transform3D(0.682544, 0.683049, 0.259959, -0.331848, -0.0272664, 0.942939, 0.651161, -0.729864, 0.208058, 0.561838, 0.741855, -2.23517e-07)
+transform = Transform3D(0.819152, 0.573577, 0, -0.573577, 0.819152, 0, 0, 0, 1, 0.561838, 0.741855, -2.23517e-07)
 rotation_edit_mode = 1
 
 [node name="UpperArm" type="MeshInstance3D" parent="Root/LeftArm"]
@@ -556,7 +555,7 @@ mesh = SubResource("SphereMesh_xv8y0")
 skeleton = NodePath("")
 
 [node name="RightArm" type="Node3D" parent="Root"]
-transform = Transform3D(0.57729, -0.789716, -0.20757, 0.0588829, 0.293808, -0.954049, 0.814414, 0.538541, 0.216113, -0.562, 0.742, -1.49012e-08)
+transform = Transform3D(0.819152, -0.573577, 0, 0.573577, 0.819152, 0, 0, 0, 1, -0.562, 0.742, -1.49012e-08)
 rotation_edit_mode = 1
 
 [node name="UpperArm" type="MeshInstance3D" parent="Root/RightArm"]
