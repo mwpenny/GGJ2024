@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7dk6a"]
 render_priority = 0
 shader = ExtResource("1_o7ruo")
-shader_parameter/fade_width = 1.0
+shader_parameter/fade_width = 0.3
 shader_parameter/inner_end = 6.505
 shader_parameter/mid_begin = 13.165
 shader_parameter/mid_width = 4.835
