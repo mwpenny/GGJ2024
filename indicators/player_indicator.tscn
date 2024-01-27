@@ -5,8 +5,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pql1"]
 render_priority = 0
 shader = ExtResource("1_dtwbo")
-shader_parameter/target_r = 0.5
-shader_parameter/thickness = 0.2
+shader_parameter/target_r = 0.4
+shader_parameter/thickness = 0.18
 shader_parameter/fade = 0.01
 shader_parameter/slice_count = 5
 shader_parameter/spin_speed = 1.0
@@ -15,6 +15,7 @@ shader_parameter/color = Color(1, 0, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kg2lo"]
 material = SubResource("ShaderMaterial_4pql1")
+size = Vector2(3, 3)
 
 [node name="PlayerIndicator" type="Node3D"]
 
