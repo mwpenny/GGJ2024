@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://70l5qjpuol02"]
+[gd_scene load_steps=3 format=3 uid="uid://cx05nf16x7jmg"]
 
-[ext_resource type="PackedScene" uid="uid://c18puofxj7psx" path="res://main.tscn" id="1_4jscy"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_p1b4t"]
+[ext_resource type="PackedScene" uid="uid://psvs405lna5e" path="res://scenes/arena.tscn" id="1_muemp"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_ch8o7"]
 
 [node name="UIRoot" type="Control"]
 layout_mode = 3
@@ -25,7 +25,7 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Main" parent="GameViewport/SubViewport" instance=ExtResource("1_4jscy")]
+[node name="World" parent="GameViewport/SubViewport" instance=ExtResource("1_muemp")]
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 1
@@ -42,7 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_p1b4t")
+script = ExtResource("2_ch8o7")
 start_button = NodePath("VBox/StartGameButton")
 
 [node name="VBox" type="VBoxContainer" parent="MainMenu"]

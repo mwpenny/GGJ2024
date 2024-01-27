@@ -56,14 +56,10 @@ func register_player_two(p):
 
 func start():
 	main_menu_enabled = false
-	# tween camera then `_enable_gameplay`
+	# TODO: tween camera before `_enable_gameplay`
+	_enable_gameplay()
 
 func _enable_gameplay():
 	hud_enabled = true
 	gameplay_enabled = true
 
-func _bind_player_devices():
-	# TODO: maybe something clever needs to happen with detecting devices and 
-	# using mouse and keyboard for one of the players
-	player_one.device_id = 0
-	player_two.device_id = 1

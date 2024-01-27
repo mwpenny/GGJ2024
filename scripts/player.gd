@@ -18,8 +18,8 @@ func _process(_delta):
 		return
 
 func _physics_process(delta):
-	#if not game_state.gameplay_enabled:
-	#	return
+	if not game_state.gameplay_enabled:
+		return
 
 	var move_direction = _get_move_direction()
 	_face_direction_xz(move_direction)
@@ -34,6 +34,9 @@ func _get_input_name(name):
 	return input_prefix + name
 
 func _get_move_direction():
+	# TODO: maybe something clever needs to happen with detecting devices and
+	# using mouse and keyboard for one of the players
+
 	var x_axis = Input.get_axis(_get_input_name("move_left"), _get_input_name("move_right"))
 	var z_axis = Input.get_axis(_get_input_name("move_up"), _get_input_name("move_down"))
 	var jump = 1 if Input.is_action_just_pressed(_get_input_name("jump")) else 0
