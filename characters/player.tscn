@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cklaqgwvvfiyf"]
+[gd_scene load_steps=35 format=3 uid="uid://cklaqgwvvfiyf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1prp"]
 albedo_color = Color(0.0313726, 0.517647, 0.321569, 1)
@@ -131,7 +131,11 @@ material = SubResource("StandardMaterial3D_1wnut")
 radius = 0.15
 height = 0.65
 
-[node name="Player" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3r2l4"]
+radius = 0.7
+height = 3.65
+
+[node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.363859, 0)
 
 [node name="Head" type="MeshInstance3D" parent="."]
@@ -295,3 +299,7 @@ mesh = SubResource("CapsuleMesh_e4or4")
 [node name="Foot" type="MeshInstance3D" parent="LegRight"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.13478, 0.13846)
 mesh = SubResource("CapsuleMesh_pvus3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48669, 0)
+shape = SubResource("CapsuleShape3D_3r2l4")
