@@ -8,14 +8,15 @@
 render_priority = 0
 shader = ExtResource("1_o7ruo")
 shader_parameter/fade_width = 0.3
-shader_parameter/inner_end = 6.505
-shader_parameter/mid_begin = 13.165
-shader_parameter/mid_width = 4.835
-shader_parameter/outer_begin = 23.0
-shader_parameter/base_color = Color(0.560784, 0.301961, 0.72549, 1)
-shader_parameter/inner_color = Color(0.905882, 0.933333, 0.796078, 1)
-shader_parameter/mid_color = Color(0.470588, 0.733333, 0.756863, 1)
-shader_parameter/outer_color = Color(0, 0, 0, 1)
+
+shader_parameter/inner_end = 8.83
+shader_parameter/mid_begin = 13.11
+shader_parameter/mid_width = 2.17
+shader_parameter/outer_begin = 23.585
+shader_parameter/base_color = Color(0.117647, 0.156863, 0.14902, 1)
+shader_parameter/inner_color = Color(0.882353, 0.913725, 0.745098, 1)
+shader_parameter/mid_color = Color(0.529412, 0.109804, 0.235294, 1)
+shader_parameter/outer_color = Color(0.466667, 0, 0.215686, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_alqsq"]
 material = SubResource("ShaderMaterial_7dk6a")

@@ -1,5 +1,7 @@
 extends Node
 
+@export var animation_tree : AnimationTree = null
+
 var game_state = null
 
 # Called when the node enters the scene tree for the first time.
