@@ -1,4 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://cklaqgwvvfiyf"]
+[gd_scene load_steps=36 format=3 uid="uid://cklaqgwvvfiyf"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_bdw3y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1prp"]
 albedo_color = Color(0.0313726, 0.517647, 0.321569, 1)
@@ -137,6 +139,7 @@ height = 3.65
 
 [node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.363859, 0)
+script = ExtResource("1_bdw3y")
 
 [node name="Head" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 2.63314, 0)
