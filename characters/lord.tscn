@@ -38,19 +38,19 @@ height = 0.1
 radius = 0.125
 height = 0.25
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ht1vu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7ofg"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_2i6i6"]
-material = SubResource("StandardMaterial3D_ht1vu")
+material = SubResource("StandardMaterial3D_p7ofg")
 radius = 0.05
 height = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf4xo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0prx"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_22uug"]
-material = SubResource("StandardMaterial3D_gf4xo")
+material = SubResource("StandardMaterial3D_o0prx")
 text = "Z"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8efvw"]
@@ -73,17 +73,17 @@ top_radius = 1.5
 bottom_radius = 2.0
 height = 6.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkotv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2otw1"]
 albedo_color = Color(0.627783, 0.304843, 0.815131, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g36es"]
-material = SubResource("StandardMaterial3D_jkotv")
+material = SubResource("StandardMaterial3D_2otw1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oan4j"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_55e4j"]
 albedo_color = Color(0.403922, 0.517647, 0.564706, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8td7f"]
-material = SubResource("StandardMaterial3D_oan4j")
+material = SubResource("StandardMaterial3D_55e4j")
 height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd5qt"]
@@ -227,46 +227,51 @@ mesh = SubResource("TorusMesh_kxbu7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.97942, 0)
 mesh = SubResource("CylinderMesh_154ml")
 
-[node name="Arm1" type="Node3D" parent="Body"]
+[node name="ArmRight" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50677, 2.97942, 0)
 
-[node name="UpperArm" type="MeshInstance3D" parent="Body/Arm1"]
+[node name="UpperArm" type="MeshInstance3D" parent="Body/ArmRight"]
 transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -0.427092, -0.925069, 0)
 mesh = SubResource("CapsuleMesh_g36es")
 
-[node name="LowerArm" type="MeshInstance3D" parent="Body/Arm1"]
-transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -1.32839, -2.40312, -0.0276732)
+[node name="LowerArm" type="MeshInstance3D" parent="Body/ArmRight/UpperArm"]
+transform = Transform3D(1, -2.66335e-08, 1.16415e-10, 3.2971e-08, 1, 0, -1.16415e-10, 0, 1, -0.0415444, -1.73074, -0.0235204)
 mesh = SubResource("CapsuleMesh_g36es")
+skeleton = NodePath("../..")
 
-[node name="Hand" type="MeshInstance3D" parent="Body/Arm1"]
-transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -2.03625, -3.55107, -0.0430127)
+[node name="Hand" type="MeshInstance3D" parent="Body/ArmRight/UpperArm/LowerArm"]
+transform = Transform3D(1, 3.16868e-09, -5.82077e-11, 3.16891e-09, 1, 2.32831e-10, 1.16415e-10, -2.32831e-10, 1, -0.0390539, -1.34811, -0.0121005)
 mesh = SubResource("CapsuleMesh_8td7f")
+skeleton = NodePath("../../..")
 
-[node name="Arm2" type="Node3D" parent="Body"]
+[node name="ArmLeft" type="Node3D" parent="Body"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.507, 2.979, 0)
 
-[node name="UpperArm" type="MeshInstance3D" parent="Body/Arm2"]
+[node name="UpperArm" type="MeshInstance3D" parent="Body/ArmLeft"]
 transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -0.427092, -0.925069, 0)
 mesh = SubResource("CapsuleMesh_g36es")
 
-[node name="LowerArm" type="MeshInstance3D" parent="Body/Arm2"]
-transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -1.32839, -2.40312, -0.0276732)
+[node name="LowerArm" type="MeshInstance3D" parent="Body/ArmLeft/UpperArm"]
+transform = Transform3D(1, -2.68419e-08, 1.16415e-10, 3.27625e-08, 1, -2.32831e-10, 1.16415e-10, 0, 1, -0.041544, -1.73074, -0.0235204)
 mesh = SubResource("CapsuleMesh_g36es")
+skeleton = NodePath("../..")
 
-[node name="Hand" type="MeshInstance3D" parent="Body/Arm2"]
-transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -2.03625, -3.55107, -0.0430127)
+[node name="Hand" type="MeshInstance3D" parent="Body/ArmLeft/UpperArm/LowerArm"]
+transform = Transform3D(1, 2.96029e-09, -5.82077e-11, 2.96063e-09, 1, 2.32831e-10, -5.82077e-11, -2.32831e-10, 1, -0.0390549, -1.34811, -0.0121005)
 mesh = SubResource("CapsuleMesh_8td7f")
+skeleton = NodePath("../../..")
 
-[node name="Belt" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.98504, 3.33786e-06)
+[node name="Belt" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00562286, 3.33786e-06)
 mesh = SubResource("CylinderMesh_5h1vi")
+skeleton = NodePath("../..")
 
-[node name="Foot1" type="MeshInstance3D" parent="."]
+[node name="FootRight" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.04783, -5.82916, 1.3318)
 mesh = SubResource("CapsuleMesh_5ft1l")
 skeleton = NodePath("../Body")
 
-[node name="Foot2" type="MeshInstance3D" parent="."]
+[node name="FootLeft" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.048, -5.82921, 1.332)
 mesh = SubResource("CapsuleMesh_5ft1l")
 skeleton = NodePath("../Body")
