@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://70l5qjpuol02"]
+
+[ext_resource type="PackedScene" uid="uid://c18puofxj7psx" path="res://main.tscn" id="1_4jscy"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_p1b4t"]
+
+[node name="UIRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameViewport" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="GameViewport"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Main" parent="GameViewport/SubViewport" instance=ExtResource("1_4jscy")]
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("start_button")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_p1b4t")
+start_button = NodePath("VBox/StartGameButton")
+
+[node name="VBox" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpacerTop" type="Control" parent="MainMenu/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartGameButton" type="Button" parent="MainMenu/VBox"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="SpacerBottom" type="Control" parent="MainMenu/VBox"]
+layout_mode = 2
+size_flags_vertical = 3

@@ -15,6 +15,10 @@ run/main_scene="res://characters/lord.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://scripts/game_state.gd"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
