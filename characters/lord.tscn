@@ -1,0 +1,179 @@
+[gd_scene load_steps=16 format=3 uid="uid://cri6eyis8mjhe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0eji"]
+albedo_color = Color(0.403922, 0.517647, 0.564706, 1)
+emission_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_fw2cs"]
+material = SubResource("StandardMaterial3D_r0eji")
+radius = 1.0
+height = 3.0
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oxvue"]
+albedo_color = Color(0.862745, 0.619608, 0.192157, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_prowm"]
+material = SubResource("StandardMaterial3D_oxvue")
+top_radius = 0.6
+bottom_radius = 0.6
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlwew"]
+albedo_color = Color(0.862745, 0.619608, 0.192157, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_n76uh"]
+material = SubResource("StandardMaterial3D_hlwew")
+size = Vector3(0.25, 0.25, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnuwq"]
+albedo_color = Color(0.905882, 0, 0.207843, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2038o"]
+material = SubResource("StandardMaterial3D_tnuwq")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_huaus"]
+radius = 0.125
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ht1vu"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2i6i6"]
+material = SubResource("StandardMaterial3D_ht1vu")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf4xo"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_22uug"]
+material = SubResource("StandardMaterial3D_gf4xo")
+text = "Z"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8efvw"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_67wrv"]
+material = SubResource("StandardMaterial3D_8efvw")
+text = "U"
+
+[node name="Lord" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.90137, 0)
+
+[node name="Head" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_fw2cs")
+
+[node name="Crown" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5605, 0)
+mesh = SubResource("CylinderMesh_prowm")
+
+[node name="Spike" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.172867, 0.5328)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike2" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(0.809017, 0, 0.587785, 0, 1, 0, -0.587785, 0, 0.809017, 0.313172, 0.172867, 0.431045)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike3" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(0.309017, 0, 0.951057, 0, 1, 0, -0.951057, 0, 0.309017, 0.506723, 0.172867, 0.164644)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike4" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(-0.309017, 0, 0.951056, 0, 1, 0, -0.951056, 0, -0.309017, 0.506723, 0.172867, -0.164644)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike5" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(-0.809017, 0, 0.587785, 0, 1, 0, -0.587785, 0, -0.809017, 0.313172, 0.172867, -0.431045)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike6" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.06184e-07, 0.172867, -0.5328)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike7" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(-0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, -0.809017, -0.313172, 0.172867, -0.431045)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike8" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(-0.309017, 0, -0.951057, 0, 1, 0, 0.951057, 0, -0.309017, -0.506723, 0.172867, -0.164644)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike9" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(0.309017, 0, -0.951057, 0, 1, 0, 0.951057, 0, 0.309017, -0.506723, 0.172867, 0.164645)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Spike10" type="MeshInstance3D" parent="Head/Crown"]
+transform = Transform3D(0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, 0.809017, -0.313172, 0.172867, 0.431045)
+mesh = SubResource("PrismMesh_n76uh")
+
+[node name="Jewel" type="MeshInstance3D" parent="Head/Crown/Spike10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0457914)
+mesh = SubResource("SphereMesh_2038o")
+
+[node name="Eye1" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2.019, 0.686)
+mesh = SubResource("SphereMesh_huaus")
+
+[node name="Pupil" type="MeshInstance3D" parent="Head/Eye1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0936306)
+mesh = SubResource("SphereMesh_2i6i6")
+
+[node name="Brow" type="MeshInstance3D" parent="Head/Eye1"]
+transform = Transform3D(2, 0, 0, 0, 0.75, 0, 0, 0, 2, 0, 0.231093, -0.077449)
+mesh = SubResource("TextMesh_22uug")
+
+[node name="Eye2" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 2.019, 0.686)
+mesh = SubResource("SphereMesh_huaus")
+
+[node name="Pupil" type="MeshInstance3D" parent="Head/Eye2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0936306)
+mesh = SubResource("SphereMesh_2i6i6")
+
+[node name="Brow" type="MeshInstance3D" parent="Head/Eye2"]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 0.75, 0, 1.74846e-07, 0, -2, 0, 0.231093, -0.077449)
+mesh = SubResource("TextMesh_22uug")
+
+[node name="Mouth" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(-6, 6.03983e-07, 0, -9.05975e-07, -4, 0, 0, 0, 1, 0, 0.717611, 0.965005)
+mesh = SubResource("TextMesh_67wrv")
