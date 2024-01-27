@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cri6eyis8mjhe"]
+[gd_scene load_steps=27 format=3 uid="uid://cri6eyis8mjhe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0eji"]
 albedo_color = Color(0.403922, 0.517647, 0.564706, 1)
@@ -60,8 +60,49 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_8efvw")
 text = "U"
 
+[sub_resource type="TorusMesh" id="TorusMesh_kxbu7"]
+inner_radius = 1.0
+outer_radius = 1.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1c4j"]
+albedo_color = Color(0.627783, 0.304843, 0.815131, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_154ml"]
+material = SubResource("StandardMaterial3D_u1c4j")
+top_radius = 1.5
+bottom_radius = 2.0
+height = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkotv"]
+albedo_color = Color(0.627783, 0.304843, 0.815131, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g36es"]
+material = SubResource("StandardMaterial3D_jkotv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oan4j"]
+albedo_color = Color(0.403922, 0.517647, 0.564706, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8td7f"]
+material = SubResource("StandardMaterial3D_oan4j")
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd5qt"]
+albedo_color = Color(0.862745, 0.619608, 0.192157, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5h1vi"]
+material = SubResource("StandardMaterial3D_fd5qt")
+top_radius = 1.75
+bottom_radius = 1.8
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v46tr"]
+albedo_color = Color(0.47451, 0.168627, 0.172549, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5ft1l"]
+material = SubResource("StandardMaterial3D_v46tr")
+
 [node name="Lord" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.90137, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09288, 0)
 
 [node name="Head" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_fw2cs")
@@ -177,3 +218,55 @@ mesh = SubResource("TextMesh_22uug")
 [node name="Mouth" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(-6, 6.03983e-07, 0, -9.05975e-07, -4, 0, 0, 0, 1, 0, 0.717611, 0.965005)
 mesh = SubResource("TextMesh_67wrv")
+
+[node name="Neck" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0872984, 0)
+mesh = SubResource("TorusMesh_kxbu7")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.97942, 0)
+mesh = SubResource("CylinderMesh_154ml")
+
+[node name="Arm1" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.50677, 2.97942, 0)
+
+[node name="UpperArm" type="MeshInstance3D" parent="Body/Arm1"]
+transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -0.427092, -0.925069, 0)
+mesh = SubResource("CapsuleMesh_g36es")
+
+[node name="LowerArm" type="MeshInstance3D" parent="Body/Arm1"]
+transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -1.32839, -2.40312, -0.0276732)
+mesh = SubResource("CapsuleMesh_g36es")
+
+[node name="Hand" type="MeshInstance3D" parent="Body/Arm1"]
+transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -2.03625, -3.55107, -0.0430127)
+mesh = SubResource("CapsuleMesh_8td7f")
+
+[node name="Arm2" type="Node3D" parent="Body"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.507, 2.979, 0)
+
+[node name="UpperArm" type="MeshInstance3D" parent="Body/Arm2"]
+transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -0.427092, -0.925069, 0)
+mesh = SubResource("CapsuleMesh_g36es")
+
+[node name="LowerArm" type="MeshInstance3D" parent="Body/Arm2"]
+transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -1.32839, -2.40312, -0.0276732)
+mesh = SubResource("CapsuleMesh_g36es")
+
+[node name="Hand" type="MeshInstance3D" parent="Body/Arm2"]
+transform = Transform3D(0.866026, 0.499997, -0.00174533, -0.499999, 0.866024, -0.00174533, 0.000638836, 0.00238416, 0.999997, -2.03625, -3.55107, -0.0430127)
+mesh = SubResource("CapsuleMesh_8td7f")
+
+[node name="Belt" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.98504, 3.33786e-06)
+mesh = SubResource("CylinderMesh_5h1vi")
+
+[node name="Foot1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.04783, -5.82916, 1.3318)
+mesh = SubResource("CapsuleMesh_5ft1l")
+skeleton = NodePath("../Body")
+
+[node name="Foot2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.048, -5.82921, 1.332)
+mesh = SubResource("CapsuleMesh_5ft1l")
+skeleton = NodePath("../Body")
