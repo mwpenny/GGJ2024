@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://psvs405lna5e"]
+[gd_scene load_steps=12 format=3 uid="uid://psvs405lna5e"]
 
 [ext_resource type="Shader" path="res://shaders/platform.gdshader" id="1_o7ruo"]
 [ext_resource type="Script" path="res://scripts/circle_of_walls.gd" id="2_1wyeo"]
@@ -38,6 +38,10 @@ sky_material = SubResource("PhysicalSkyMaterial_717df")
 [sub_resource type="Environment" id="Environment_t3p2d"]
 background_mode = 2
 sky = SubResource("Sky_gqm1b")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ggid6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2d64m"]
 render_priority = 1
@@ -52,6 +56,10 @@ shader_parameter/height_boost_strength = 1.3
 
 [node name="World" type="Node3D"]
 
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
 [node name="Platform" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_alqsq")
 
@@ -62,16 +70,18 @@ shape = SubResource("ConcavePolygonShape3D_8rvkk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t3p2d")
+camera_attributes = SubResource("CameraAttributesPractical_ggid6")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.860182, 0.509988, 0, -0.509988, 0.860182, 0, 20.8004, 26.4561)
-projection = 1
-size = 37.0
-
-[node name="Node3D" type="Node3D" parent="."]
+[node name="CircleOfWalls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971157, 0)
 script = ExtResource("2_1wyeo")
 mat = SubResource("ShaderMaterial_2d64m")
 segments = 64
 radius = 25.0
 height = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.860182, 0.509988, 0, -0.509988, 0.860182, 0, 20.8004, 26.4561)
+projection = 1
+current = true
+size = 37.0
