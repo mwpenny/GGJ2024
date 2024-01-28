@@ -241,4 +241,3 @@ func _target_ground_pound():
 func finish_targeting():
 	ground_pound_targeting = false
 	_change_state(AIState.GROUND_POUND)
->>>>>>> 8ec42ef (lord behavior changes, rotate before charge, target)
