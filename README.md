@@ -6,9 +6,11 @@ You're jesters tasked with pleasing the Lord of the land... with laughter! Pleas
 
 Made for Global Game Jam 2024 (theme: "make me laugh").
 
+Jam page: https://globalgamejam.org/games/2024/super-laugh-bros-6
+
 ## Playing
 
-See releases page.
+See releases page for downloads, or visit https://mwpenny.github.io/GGJ2024.
 
 ## Controls
 
