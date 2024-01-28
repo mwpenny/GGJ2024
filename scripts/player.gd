@@ -10,6 +10,9 @@ const MAX_VELOCITY = 25
 const GRAVITY = 70
 const JUMP_IMPULSE = 20
 
+# 1.0 for player one, -1.0 for player two
+var score_mult = 0
+
 func _ready():
 	game_state = get_node("/root/GameState")
 
@@ -28,6 +31,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func init(player_num):
+	score_mult = -2.0 * (player_num - 1.5) #trust me: it works
+	# print("Player %d has %f multiplier." % [player_num, score_mult])
 	input_prefix = "p%d_" % player_num
 
 func _get_input_name(name):

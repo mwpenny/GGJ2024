@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://psvs405lna5e"]
+[gd_scene load_steps=15 format=3 uid="uid://psvs405lna5e"]
 
 [ext_resource type="Script" path="res://scripts/arena.gd" id="1_jqia0"]
 [ext_resource type="Shader" path="res://shaders/platform.gdshader" id="2_s6m76"]
 [ext_resource type="Script" path="res://scripts/circle_of_walls.gd" id="3_xv8r2"]
 [ext_resource type="Shader" path="res://shaders/walls.gdshader" id="4_ch8qp"]
 [ext_resource type="PackedScene" uid="uid://cklaqgwvvfiyf" path="res://characters/player.tscn" id="5_vckah"]
+[ext_resource type="PackedScene" uid="uid://cri6eyis8mjhe" path="res://characters/lord.tscn" id="6_veo1w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7dk6a"]
 render_priority = 0
@@ -94,10 +95,10 @@ current = true
 size = 37.0
 
 [node name="Player1" parent="." instance=ExtResource("5_vckah")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 17, 0)
+transform = Transform3D(0.694633, 0, 0.719364, 0, 1, 0, -0.719364, 0, 0.694633, -16.0106, 1.22684, -5.83851)
 
 [node name="Player2" parent="." instance=ExtResource("5_vckah")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 17, 0)
+transform = Transform3D(0.694658, 0, -0.71934, 0, 1, 0, 0.71934, 0, 0.694658, 16.011, 1.227, -5.83851)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.996087, -0.0883728, 0, 0.0883728, 0.996087, 0, 10.6733, 27.2879)
@@ -106,3 +107,9 @@ light_specular = 1.0
 light_bake_mode = 0
 spot_range = 84.1582
 spot_angle = 75.14
+
+[node name="Lord" parent="." instance=ExtResource("6_veo1w")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 7.84236, 0)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+mass = 30.0
