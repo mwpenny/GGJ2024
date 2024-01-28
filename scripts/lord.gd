@@ -310,3 +310,7 @@ func _on_player_knocked_back(player):
 		other_player = game_state.player_one
 
 	player_love += other_player.score_mult * 10
+
+
+func _on_player_death(player):
+	player_love = 0
