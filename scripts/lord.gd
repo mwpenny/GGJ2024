@@ -109,7 +109,8 @@ func _do_think(delta):
 
 func _update_follow_target():
 	if player_love == 0:
-		follow_target = null
+		var choices = [game_state.player_one, game_state.player_two]
+		follow_target = choices[randi() % len(choices)]
 		return
 	if player_love > 0:
 		follow_target = game_state.player_two
@@ -154,6 +155,8 @@ func _do_chase(delta):
 		_change_state(AIState.RETURN_TO_CENTER)
 
 func _face_follow_target():
+	if not follow_target:
+		return
 	var look_at = follow_target.global_position
 	look_at.y = visuals_root.global_position.y
 	visuals_root.global_transform = visuals_root.global_transform.looking_at(look_at)
