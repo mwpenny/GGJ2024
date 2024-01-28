@@ -15,6 +15,7 @@ signal death(player)
 
 var game_state = null
 var input_prefix = ""
+var mass = 3.0
 
 const ACCELERATION = 175
 const FRICTION = 60

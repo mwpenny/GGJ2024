@@ -812,11 +812,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09288, 0)
 collision_layer = 6
 collision_mask = 7
 axis_lock_angular_y = true
-mass = 40.0
+mass = 100.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -3, 0)
 lock_rotation = true
 custom_integrator = true
+max_contacts_reported = 4
+contact_monitor = true
 script = ExtResource("1_uxa5b")
 visuals_root = NodePath("VisualsRoot")
 animation_tree = NodePath("AnimationTree")
@@ -1062,4 +1064,5 @@ libraries = {
 }
 speed_scale = 2.0
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

@@ -169,3 +169,9 @@ func _handle_laughter():
 	animation_tree.set("parameters/conditions/is_laughing", is_laughing)
 	animation_tree.set("parameters/conditions/is_neutral", not is_laughing)
 	laugh_particles.emitting = is_laughing
+
+
+func _on_body_entered(body):
+	if body == game_state.player_one or body == game_state.player_two:
+		var mass_ratio = mass / body.mass
+		body.velocity += linear_velocity * mass_ratio

@@ -165,7 +165,6 @@ spot_angle = 75.14
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 7.84236, 0)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-mass = 30.0
 
 [connection signal="death" from="Player1" to="." method="_on_player_death"]
 [connection signal="death" from="Player2" to="." method="_on_player_death"]
