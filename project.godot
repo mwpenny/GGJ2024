@@ -77,6 +77,11 @@ p2_jump={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Static"
+3d_physics/layer_2="Dynamic"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
