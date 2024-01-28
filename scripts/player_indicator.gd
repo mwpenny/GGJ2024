@@ -9,7 +9,7 @@ func _ready():
 func _process(delta):
 	var collision = ray.get_collision_point()
 	if collision:
-		global_position.y = collision.y
+		global_position.y = collision.y + VERY_SMALL_VERTICAL_BUMP
 	else:
 		global_position.y = get_parent().global_position.y + VERY_SMALL_VERTICAL_BUMP
 
