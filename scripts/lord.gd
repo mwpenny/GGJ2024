@@ -2,6 +2,7 @@ extends RigidBody3D
 
 @export var visuals_root : Node3D = null
 @export var animation_tree : AnimationTree = null
+@export var laugh_particles : GPUParticles3D
 
 var game_state = null
 
@@ -23,7 +24,7 @@ var awaiting_scoot: bool = true
 var state_machine = AIState.THINK
 var state_timer: float = THINK_TIME
 var movement_speed = 0
-var player_love = -10.0
+var player_love = -40.0
 var follow_target = null
 var normalized_movement_vector = Vector2(0,1)
 var await_scoot_timer = SCOOT_WAIT_TIME
@@ -44,6 +45,8 @@ func _process(delta):
 		_do_chase(delta)
 	elif state_machine == AIState.GROUND_POUND:
 		_do_ground_pound(delta)
+	
+	_handle_laughter()
 
 func _reset_animations():
 	scoot_count = 0
@@ -155,3 +158,14 @@ func _on_animation_tree_animation_finished(anim_name):
 		if scoot_count == 2:
 			scoot_count = 0
 			_end_scoot_animation()
+
+func _handle_laughter():
+	var is_laughing = false
+	if (
+		state_machine == AIState.THINK
+		or state_machine == AIState.CHASE
+	   ) and abs(player_love) > 30.0:
+		is_laughing = true
+	animation_tree.set("parameters/conditions/is_laughing", is_laughing)
+	animation_tree.set("parameters/conditions/is_neutral", not is_laughing)
+	laugh_particles.emitting = is_laughing

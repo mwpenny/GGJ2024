@@ -1,7 +1,8 @@
-[gd_scene load_steps=79 format=3 uid="uid://cri6eyis8mjhe"]
+[gd_scene load_steps=83 format=3 uid="uid://cri6eyis8mjhe"]
 
 [ext_resource type="Script" path="res://scripts/lord.gd" id="1_uxa5b"]
 [ext_resource type="Curve" uid="uid://cgjrvu5pn4r1j" path="res://data/smoothstep.tres" id="2_d7ltw"]
+[ext_resource type="Texture2D" uid="uid://dl16i510r7gpl" path="res://textures/ha_text.png" id="3_cy120"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1c4j"]
 albedo_color = Color(0.627783, 0.304843, 0.815131, 1)
@@ -97,6 +98,30 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="TextMesh" id="TextMesh_67wrv"]
 material = SubResource("StandardMaterial3D_8efvw")
 text = "U"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8h5yk"]
+direction = Vector3(0, 0.5, -1)
+spread = 10.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, -4, 0)
+color = Color(1, 1, 0, 1)
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eh7ik"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_cy120")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_iy624"]
+material = SubResource("StandardMaterial3D_eh7ik")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v46tr"]
 albedo_color = Color(0.47451, 0.168627, 0.172549, 1)
@@ -231,6 +256,7 @@ tracks/7/keys = PackedFloat32Array(0, 1, 0.707107, 0, 0, 0.707107, 1.5, 1, 0.700
 [sub_resource type="Animation" id="Animation_imojk"]
 resource_name = "laugh"
 length = 3.0
+loop_mode = 1
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -576,7 +602,7 @@ animation = &"run"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_uxwuq"]
 filter_enabled = true
-filters = ["RootPivot/Body/ArmLeftRoot/LeftShoulder", "RootPivot/Body/ArmLeftRoot/LeftShoulder/UpperArm/ElbowRoot/LeftElbow", "RootPivot/Body/ArmRightRoot/RightShoulder", "RootPivot/Body/ArmRightRoot/RightShoulder/UpperArm/ElbowRoot/RightElbow"]
+filters = ["RootPivot/Body/ArmLeftRoot/LeftShoulder", "RootPivot/Body/ArmLeftRoot/LeftShoulder/UpperArm/ElbowRoot/LeftElbow", "RootPivot/Body/ArmRightRoot/RightShoulder", "RootPivot/Body/ArmRightRoot/RightShoulder/UpperArm/ElbowRoot/RightElbow", "VisualsRoot/CharacterParent/RootPivot/Body/ArmLeftRoot/LeftShoulder", "VisualsRoot/CharacterParent/RootPivot/Body/ArmLeftRoot/LeftShoulder/UpperArm/ElbowRoot/LeftElbow", "VisualsRoot/CharacterParent/RootPivot/Body/ArmRightRoot/RightShoulder", "VisualsRoot/CharacterParent/RootPivot/Body/ArmRightRoot/RightShoulder/UpperArm/ElbowRoot/RightElbow", "VisualsRoot/CharacterParent/RootPivot/Body/Neck/Head"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_de6td"]
 nodes/Animation/node = SubResource("AnimationNodeAnimation_2nc0b")
@@ -596,7 +622,7 @@ animation = &"walk"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qfaa8"]
 filter_enabled = true
-filters = ["RootPivot/Body/ArmLeftRoot/LeftShoulder", "RootPivot/Body/ArmLeftRoot/LeftShoulder/UpperArm/ElbowRoot/LeftElbow", "RootPivot/Body/ArmRightRoot/RightShoulder", "RootPivot/Body/ArmRightRoot/RightShoulder/UpperArm/ElbowRoot/RightElbow", "RootPivot/Body/Neck/Head"]
+filters = ["RootPivot/Body/ArmLeftRoot/LeftShoulder", "RootPivot/Body/ArmLeftRoot/LeftShoulder/UpperArm/ElbowRoot/LeftElbow", "RootPivot/Body/ArmRightRoot/RightShoulder", "RootPivot/Body/ArmRightRoot/RightShoulder/UpperArm/ElbowRoot/RightElbow", "RootPivot/Body/Neck/Head", "VisualsRoot/CharacterParent/RootPivot/Body/ArmLeftRoot/LeftShoulder", "VisualsRoot/CharacterParent/RootPivot/Body/ArmLeftRoot/LeftShoulder/UpperArm/ElbowRoot/LeftElbow", "VisualsRoot/CharacterParent/RootPivot/Body/ArmRightRoot/RightShoulder", "VisualsRoot/CharacterParent/RootPivot/Body/ArmRightRoot/RightShoulder/UpperArm/ElbowRoot/RightElbow", "VisualsRoot/CharacterParent/RootPivot/Body/Neck/Head"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fm48h"]
 graph_offset = Vector2(-240.5, -68.5)
@@ -662,6 +688,7 @@ advance_condition = &"is_running"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nlwc3"]
 xfade_time = 0.2
 xfade_curve = ExtResource("2_d7ltw")
+priority = 2
 advance_mode = 2
 advance_condition = &"is_walking"
 
@@ -723,34 +750,34 @@ advance_mode = 2
 advance_condition = &"is_laughing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4tvw5"]
-switch_mode = 2
 advance_mode = 2
+advance_condition = &"is_neutral"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uved2"]
 xfade_time = 0.2
 xfade_curve = ExtResource("2_d7ltw")
-priority = 2
+priority = 3
 advance_mode = 2
 advance_condition = &"is_laughing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l6o5v"]
 xfade_time = 0.2
 xfade_curve = ExtResource("2_d7ltw")
-switch_mode = 2
 advance_mode = 2
+advance_condition = &"is_neutral"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_smmck"]
 xfade_time = 0.2
 xfade_curve = ExtResource("2_d7ltw")
-priority = 2
+priority = 3
 advance_mode = 2
 advance_condition = &"is_laughing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iaj8g"]
 xfade_time = 0.2
 xfade_curve = ExtResource("2_d7ltw")
-switch_mode = 2
 advance_mode = 2
+advance_condition = &"is_neutral"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fxpfj"]
 states/BlendTree/node = SubResource("AnimationNodeBlendTree_fm48h")
@@ -778,9 +805,9 @@ states/wiggle_right/position = Vector2(667, -60)
 states/wiggle_right_end/node = SubResource("AnimationNodeAnimation_stk8f")
 states/wiggle_right_end/position = Vector2(713.5, -221.75)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_wxlaj"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_6j0vt"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_rhg0c"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_l3gdn"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_xbq6r"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_nlwc3"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e2sl4"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_arf1w"), "idle", "swing_forward", SubResource("AnimationNodeStateMachineTransition_xic5w"), "swing_forward", "idle", SubResource("AnimationNodeStateMachineTransition_sfxk6"), "idle", "wiggle_left", SubResource("AnimationNodeStateMachineTransition_4a4qc"), "wiggle_left", "wiggle_left_end", SubResource("AnimationNodeStateMachineTransition_pxkf2"), "wiggle_left_end", "idle", SubResource("AnimationNodeStateMachineTransition_pvkbq"), "idle", "wiggle_right", SubResource("AnimationNodeStateMachineTransition_ec87c"), "wiggle_right", "wiggle_right_end", SubResource("AnimationNodeStateMachineTransition_nt071"), "wiggle_right_end", "idle", SubResource("AnimationNodeStateMachineTransition_n3sjr"), "idle", "laugh", SubResource("AnimationNodeStateMachineTransition_je2is"), "laugh", "idle", SubResource("AnimationNodeStateMachineTransition_4tvw5"), "walk", "BlendTree", SubResource("AnimationNodeStateMachineTransition_uved2"), "BlendTree", "walk", SubResource("AnimationNodeStateMachineTransition_l6o5v"), "run", "BlendTree 2", SubResource("AnimationNodeStateMachineTransition_smmck"), "BlendTree 2", "run", SubResource("AnimationNodeStateMachineTransition_iaj8g")]
-graph_offset = Vector2(154, -143)
+graph_offset = Vector2(-148.567, 57.9155)
 
-[node name="Lord" type="RigidBody3D" node_paths=PackedStringArray("visuals_root", "animation_tree")]
+[node name="Lord" type="RigidBody3D" node_paths=PackedStringArray("visuals_root", "animation_tree", "laugh_particles")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09288, 0)
 collision_layer = 6
 collision_mask = 7
@@ -793,6 +820,7 @@ custom_integrator = true
 script = ExtResource("1_uxa5b")
 visuals_root = NodePath("VisualsRoot")
 animation_tree = NodePath("AnimationTree")
+laugh_particles = NodePath("VisualsRoot/CharacterParent/RootPivot/Body/Neck/Head/LaughParticleEmitter")
 
 [node name="VisualsRoot" type="Node3D" parent="."]
 
@@ -992,6 +1020,13 @@ mesh = SubResource("TextMesh_22uug")
 transform = Transform3D(-6, 6.03983e-07, 0, -9.05975e-07, -4, 0, 0, 0, 1, 0, 0.717611, 0.965005)
 mesh = SubResource("TextMesh_67wrv")
 
+[node name="LaughParticleEmitter" type="GPUParticles3D" parent="VisualsRoot/CharacterParent/RootPivot/Body/Neck/Head"]
+transform = Transform3D(-0.996148, -0.010484, -0.0870656, 0.00239091, 0.989212, -0.146471, 0.087662, -0.146115, -0.985377, -0.064728, 0.363186, 0.538007)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_8h5yk")
+draw_pass_1 = SubResource("QuadMesh_iy624")
+
 [node name="FootRight" type="MeshInstance3D" parent="VisualsRoot/CharacterParent/RootPivot/Body"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.04783, -2.84995, 1.33188)
 mesh = SubResource("CapsuleMesh_5ft1l")
@@ -1012,6 +1047,7 @@ tree_root = SubResource("AnimationNodeStateMachine_fxpfj")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle_or_special = true
 parameters/conditions/is_laughing = false
+parameters/conditions/is_neutral = false
 parameters/conditions/is_running = false
 parameters/conditions/is_swinging = false
 parameters/conditions/is_walking = false
