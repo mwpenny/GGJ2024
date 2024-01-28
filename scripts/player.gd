@@ -31,6 +31,7 @@ const FART_TIME = 2
 
 const GRAVITY = 70
 const JUMP_IMPULSE = 20
+const FART_JUMP_IMPULSE = JUMP_IMPULSE * 2
 
 # 1.0 for player one, -1.0 for player two
 var score_mult = 0
@@ -138,6 +139,9 @@ func _process_actions():
 		_do_fart()
 
 func _do_fart():
+	if not is_on_floor():
+		velocity.y += FART_JUMP_IMPULSE
+	
 	fart_timer = FART_TIME
 	fart_particles.emitting = true
 	farted.emit(self)
@@ -175,6 +179,6 @@ func _get_velocity_vector(direction, delta):
 
 	# TODO: analog jump
 	if direction.y > 0 and is_on_floor():
-		velocity_vector.y = JUMP_IMPULSE
+		velocity_vector.y += JUMP_IMPULSE
 
 	return velocity_vector
