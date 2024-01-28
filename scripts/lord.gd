@@ -3,6 +3,8 @@ extends RigidBody3D
 @export var visuals_root : Node3D = null
 @export var animation_tree : AnimationTree = null
 @export var laugh_particles : GPUParticles3D
+@export var center_marker : Node3D = null
+@export var south_marker : Node3D = null
 
 @export var target_indicator_scene : PackedScene
 
@@ -147,10 +149,15 @@ func _do_chase(delta):
 	
 	player_love += follow_target.score_mult * CHASE_LOVE_DECAY_MULT
 	if state_timer <= 0:
-		_change_state(AIState.THINK)
+		_change_state(AIState.RETURN_TO_CENTER)
 
 func _face_follow_target():
 	var look_at = follow_target.global_position
+	look_at.y = visuals_root.global_position.y
+	visuals_root.global_transform = visuals_root.global_transform.looking_at(look_at)
+
+func _face_south_marker():
+	var look_at = south_marker.global_position
 	look_at.y = visuals_root.global_position.y
 	visuals_root.global_transform = visuals_root.global_transform.looking_at(look_at)
 
@@ -160,7 +167,7 @@ func _do_ground_pound_target(delta):
 		ground_pound_targeting = true
 
 func _do_ground_pound(delta):
-	_change_state(AIState.THINK)
+	_change_state(AIState.RETURN_TO_CENTER)
 
 func _integrate_forces(_state):
 	if follow_target:
@@ -219,7 +226,12 @@ func _on_body_exited(body):
 		collisions.erase(body)
 
 func _do_return_to_center(_delta):
-	pass
+	follow_target = center_marker
+	movement_speed = WALK_SPEED
+	animation_tree.set("parameters/conditions/is_walking", true)
+	_face_south_marker()
+	if global_position.distance_to(center_marker.global_position) < 7.0:
+		_change_state(AIState.THINK)
 
 func _do_pre_chase(_delta):
 	_rotate_towards_follow_target(_delta)
@@ -230,6 +242,7 @@ func _do_pre_chase(_delta):
 func _rotate_towards_follow_target(_delta):
 	#TODO slow down
 	_face_follow_target()
+
 
 func _target_ground_pound():
 	_update_follow_target()
