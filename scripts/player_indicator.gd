@@ -1,5 +1,6 @@
 extends Node3D
 
+const VERY_SMALL_VERTICAL_BUMP = 0.05 #prevent z-fighting
 var ray = null
 
 func _ready():
@@ -10,6 +11,6 @@ func _process(delta):
 	if collision:
 		global_position.y = collision.y
 	else:
-		global_position.y = get_parent().global_position.y
+		global_position.y = get_parent().global_position.y + VERY_SMALL_VERTICAL_BUMP
 
 	basis = get_parent().global_transform.basis.inverse()
