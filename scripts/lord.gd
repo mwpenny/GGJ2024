@@ -29,6 +29,7 @@ const TORPEDO_SPEED = 4.3
 const THINK_TIME = 2.0
 const SCOOT_WAIT_TIME = 1.0
 const MAX_ROTATION = 0.9
+const MAX_LOVE = 75
 
 var last_scoot_was_left: bool = false
 var awaiting_scoot: bool = true
@@ -154,6 +155,12 @@ func _do_chase(delta):
 	# HACK
 	if follow_target != fart_target:
 		player_love += follow_target.score_mult * CHASE_LOVE_DECAY_MULT
+
+		# HACK
+		if player_love > MAX_LOVE:
+			player_love = MAX_LOVE
+		elif player_love < -MAX_LOVE:
+			player_love = -MAX_LOVE
 	if state_timer <= 0:
 		_change_state(AIState.RETURN_TO_CENTER)
 
