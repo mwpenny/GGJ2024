@@ -158,8 +158,8 @@ func _apply_collisions():
 			linear_velocity.x,
 			5,
 			linear_velocity.y
-		)
-		body.apply_knockback(knockback_vector * mass_ratio)
+		) * mass_ratio
+		body.apply_knockback(knockback_vector.limit_length(40))
 
 func _end_scoot_animation():
 	awaiting_scoot = true
