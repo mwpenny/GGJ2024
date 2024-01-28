@@ -18,12 +18,10 @@ shader_parameter/color = Color(1, 0, 0, 1)
 material = SubResource("ShaderMaterial_4pql1")
 size = Vector2(3, 3)
 
-[node name="PlayerIndicator" type="Node3D"]
-script = ExtResource("1_3nlnf")
-
-[node name="IndicatorMesh" type="MeshInstance3D" parent="."]
+[node name="IndicatorMesh" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02062, 0)
 mesh = SubResource("PlaneMesh_kg2lo")
+script = ExtResource("1_3nlnf")
 
 [node name="Ray" type="RayCast3D" parent="."]
 target_position = Vector3(0, -999, 0)

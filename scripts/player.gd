@@ -1,4 +1,15 @@
+@tool #just to allow visualizing the material overrides.
+
 extends CharacterBody3D
+
+const PlayerIndicator = preload("res://scripts/player_indicator.gd")
+
+@export var clothing_material : Material
+@export var hat_material : Material
+@export var indicator_material : Material
+@export var clothing_meshes : Array[MeshInstance3D]
+@export var hat_meshes : Array[MeshInstance3D]
+@export var indicator : MeshInstance3D
 
 var game_state = null
 var input_prefix = ""
@@ -15,13 +26,22 @@ var score_mult = 0
 
 func _ready():
 	game_state = get_node("/root/GameState")
+	# Override material colors
+	if clothing_material and clothing_meshes:
+		for mesh in clothing_meshes:
+			mesh.material_override = clothing_material
+	if hat_material and hat_meshes:
+		for mesh in hat_meshes:
+			mesh.material_override = hat_material
+	if indicator_material and indicator:
+		indicator.material_override = indicator_material
 
 func _process(_delta):
-	if not game_state.gameplay_enabled:
+	if not game_state or not game_state.gameplay_enabled:
 		return
 
 func _physics_process(delta):
-	if not game_state.gameplay_enabled:
+	if not game_state or not game_state.gameplay_enabled:
 		return
 
 	var move_direction = _get_move_direction()

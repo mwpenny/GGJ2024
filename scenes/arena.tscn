@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://psvs405lna5e"]
+[gd_scene load_steps=22 format=3 uid="uid://psvs405lna5e"]
 
 [ext_resource type="Script" path="res://scripts/arena.gd" id="1_jqia0"]
 [ext_resource type="Shader" path="res://shaders/platform.gdshader" id="2_s6m76"]
 [ext_resource type="Script" path="res://scripts/circle_of_walls.gd" id="3_xv8r2"]
 [ext_resource type="Shader" path="res://shaders/walls.gdshader" id="4_ch8qp"]
 [ext_resource type="PackedScene" uid="uid://cklaqgwvvfiyf" path="res://characters/player.tscn" id="5_vckah"]
+[ext_resource type="Shader" path="res://shaders/player_indicator.gdshader" id="6_tp5ud"]
 [ext_resource type="PackedScene" uid="uid://cri6eyis8mjhe" path="res://characters/lord.tscn" id="6_veo1w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7dk6a"]
@@ -56,6 +57,52 @@ shader_parameter/angular_period_b = -3
 shader_parameter/speed_b = -0.7
 shader_parameter/height_boost_strength = 1.3
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67nfn"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.976471, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egqsw"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.458824, 0.741176, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gw7bj"]
+render_priority = 0
+shader = ExtResource("6_tp5ud")
+shader_parameter/target_r = 0.4
+shader_parameter/thickness = 0.1
+shader_parameter/fade = 0.01
+shader_parameter/slice_count = 3
+shader_parameter/spin_speed = 1.0
+shader_parameter/slice_width = 0.4
+shader_parameter/color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0c5a"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.239216, 0.356863, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6w2g"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.286275, 0.72549, 0.952941, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i5xc"]
+render_priority = 0
+shader = ExtResource("6_tp5ud")
+shader_parameter/target_r = 0.4
+shader_parameter/thickness = 0.1
+shader_parameter/fade = 0.01
+shader_parameter/slice_count = 3
+shader_parameter/spin_speed = 1.0
+shader_parameter/slice_width = 0.4
+shader_parameter/color = Color(0, 0.47451, 1, 1)
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_jqia0")
 
@@ -96,9 +143,15 @@ size = 37.0
 
 [node name="Player1" parent="." instance=ExtResource("5_vckah")]
 transform = Transform3D(0.694633, 0, 0.719364, 0, 1, 0, -0.719364, 0, 0.694633, -16.0106, 1.22684, -5.83851)
+clothing_material = SubResource("StandardMaterial3D_67nfn")
+hat_material = SubResource("StandardMaterial3D_egqsw")
+indicator_material = SubResource("ShaderMaterial_gw7bj")
 
 [node name="Player2" parent="." instance=ExtResource("5_vckah")]
 transform = Transform3D(0.694658, 0, -0.71934, 0, 1, 0, 0.71934, 0, 0.694658, 16.011, 1.227, -5.83851)
+clothing_material = SubResource("StandardMaterial3D_j0c5a")
+hat_material = SubResource("StandardMaterial3D_m6w2g")
+indicator_material = SubResource("ShaderMaterial_1i5xc")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.996087, -0.0883728, 0, 0.0883728, 0.996087, 0, 10.6733, 27.2879)

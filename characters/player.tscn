@@ -420,10 +420,13 @@ height = 0.2
 radius = 0.7
 height = 3.65
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("clothing_meshes", "hat_meshes", "indicator")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_bdw3y")
+clothing_meshes = [NodePath("Root/Torso"), NodePath("Root/LeftArm/UpperArm"), NodePath("Root/LeftArm/UpperArm/LeftElbow/LowerArm"), NodePath("Root/LeftArm/UpperArm/LeftElbow/LowerArm/Hand"), NodePath("Root/RightArm/UpperArm"), NodePath("Root/RightArm/UpperArm/RightElbow/LowerArm"), NodePath("Root/RightArm/UpperArm/RightElbow/LowerArm/Hand")]
+hat_meshes = [NodePath("Root/HeadPivot/Head/Hat/Base"), NodePath("Root/HeadPivot/Head/Hat/Tube/Tube base"), NodePath("Root/HeadPivot/Head/Hat/Tube/Tube base/HatEndJoint1/Tube end"), NodePath("Root/HeadPivot/Head/Hat/Tube2/Tube base"), NodePath("Root/HeadPivot/Head/Hat/Tube2/Tube base/HatEndJoint2/Tube end"), NodePath("Root/HeadPivot/Head/Hat/Tube3/Tube base"), NodePath("Root/HeadPivot/Head/Hat/Tube3/Tube base/HatEndJoint3/Tube end")]
+indicator = NodePath("Indicator")
 
 [node name="Root" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999944, 0.0105573, 0, -0.0105573, 0.999944, 0, -0.1154, 0)
