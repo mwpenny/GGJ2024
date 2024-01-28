@@ -184,7 +184,7 @@ func _do_ground_pound(delta):
 	movement_speed = TORPEDO_SPEED
 	_face_follow_target_torpedo()
 	state_timer -= delta
-	if global_position.distance_to(follow_target.global_position) < 7.0 or state_timer <= 0:
+	if global_position.distance_to(follow_target.global_position) < 2.0 or state_timer <= 0:
 		_change_state(AIState.RETURN_TO_CENTER)
 
 func _integrate_forces(_state):
