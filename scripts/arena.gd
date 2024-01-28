@@ -20,8 +20,8 @@ func _process(delta):
 func _on_player_death(player):
 	# TODO: game end screen
 	if player == game_state.player_one:
-		print("Player 1 died")
+		game_state.p2_score += 1
 	else:
-		print("Player 2 died")
+		game_state.p1_score += 1
 
 	player.global_position = Vector3(player.score_mult * -3, 10, 0)

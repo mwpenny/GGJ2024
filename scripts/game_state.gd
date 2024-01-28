@@ -9,6 +9,9 @@ var lord = null
 var player_one = null
 var player_two = null
 
+var p1_score = 0
+var p2_score = 0
+
 func reset():
 	if lord:
 		lord.reset()

@@ -93,7 +93,7 @@ func _change_state(state):
 		awaiting_scoot = true
 		state_timer = 10.0
 	elif state_machine == AIState.GROUND_POUND:
-		state_timer = 10.0
+		state_timer = 3.0
 
 func _do_think(delta):
 	animation_tree.set("parameters/conditions/idle_or_special", true)
@@ -177,7 +177,8 @@ func _do_ground_pound(delta):
 	follow_target = movable_target
 	movement_speed = TORPEDO_SPEED
 	_face_follow_target_torpedo()
-	if global_position.distance_to(follow_target.global_position) < 7.0:
+	state_timer -= delta
+	if global_position.distance_to(follow_target.global_position) < 7.0 or state_timer <= 0:
 		_change_state(AIState.RETURN_TO_CENTER)
 
 func _integrate_forces(_state):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx05nf16x7jmg"]
+[gd_scene load_steps=12 format=3 uid="uid://cx05nf16x7jmg"]
 
 [ext_resource type="PackedScene" uid="uid://psvs405lna5e" path="res://scenes/arena.tscn" id="1_muemp"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_ch8o7"]
@@ -8,6 +8,30 @@
 [ext_resource type="Texture2D" uid="uid://d0x12c3ekicfs" path="res://textures/laugh_emoji.png" id="5_5k66o"]
 [ext_resource type="Texture2D" uid="uid://d074qsyjnypro" path="res://textures/smile_emoji.png" id="6_5deet"]
 [ext_resource type="Texture2D" uid="uid://qhnfi4o2cuqr" path="res://textures/neutral_emoji.png" id="7_dsdp5"]
+
+[sub_resource type="SystemFont" id="SystemFont_1uxhp"]
+font_weight = 500
+msdf_pixel_range = 20
+
+[sub_resource type="Theme" id="Theme_xg1xi"]
+default_font = SubResource("SystemFont_1uxhp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_forbw"]
+bg_color = Color(0.423529, 0.623529, 0.788235, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.768627, 0.796078, 0.909804, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 12
+expand_margin_left = 16.0
+expand_margin_top = 8.0
+expand_margin_right = 16.0
+expand_margin_bottom = 8.0
 
 [node name="UIRoot" type="Control"]
 layout_mode = 3
@@ -34,7 +58,7 @@ render_target_update_mode = 4
 
 [node name="World" parent="GameViewport/SubViewport" instance=ExtResource("1_muemp")]
 
-[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("p1_bar", "p2_bar", "neutral_emoji", "smile_emoji", "laugh_emoji")]
+[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("p1_bar", "p2_bar", "p1_score_label", "p2_score_label", "neutral_emoji", "smile_emoji", "laugh_emoji")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +68,8 @@ grow_vertical = 2
 script = ExtResource("2_eeqpi")
 p1_bar = NodePath("VBox/CenterContainer/HBoxContainer/P1Bar")
 p2_bar = NodePath("VBox/CenterContainer/HBoxContainer/P2Bar")
+p1_score_label = NodePath("VBox/HBoxContainer/P1Score")
+p2_score_label = NodePath("VBox/HBoxContainer/P2Score")
 neutral_emoji = NodePath("VBox/CenterContainer/NeutralEmoji")
 smile_emoji = NodePath("VBox/CenterContainer/SmileEmoji")
 laugh_emoji = NodePath("VBox/CenterContainer/LaughEmoji")
@@ -56,7 +82,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="HUD/VBox"]
+[node name="SpacerTop" type="Control" parent="HUD/VBox"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
@@ -109,6 +135,46 @@ layout_mode = 2
 texture = ExtResource("7_dsdp5")
 expand_mode = 3
 
+[node name="SpacerFill" type="Control" parent="HUD/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBox"]
+layout_mode = 2
+
+[node name="SpacerLeft" type="Control" parent="HUD/VBox/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="P1Score" type="Label" parent="HUD/VBox/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="SpacerFill" type="Control" parent="HUD/VBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="P2Score" type="Label" parent="HUD/VBox/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.192157, 0.423529, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 128
+text = "0"
+
+[node name="SpacerRight" type="Control" parent="HUD/VBox/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="SpacerBottom" type="Control" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
 [node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("start_button")]
 layout_mode = 1
 anchors_preset = 15
@@ -134,8 +200,28 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="MainMenu/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.52549, 0.305882, 0.721569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 90
+text = "SUPER LAUGH BROS"
+horizontal_alignment = 1
+
 [node name="StartGameButton" type="Button" parent="MainMenu/VBox"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_xg1xi")
+theme_override_colors/font_color = Color(0.552941, 0.329412, 0.937255, 1)
+theme_override_colors/font_hover_color = Color(0.690196, 0.533333, 0.956863, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.690196, 0.533333, 0.956863, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_forbw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_forbw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_forbw")
 text = "Start Game"
 
 [node name="SpacerBottom" type="Control" parent="MainMenu/VBox"]

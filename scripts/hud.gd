@@ -3,6 +3,9 @@ extends Control
 @export var p1_bar: TextureProgressBar = null
 @export var p2_bar: TextureProgressBar = null
 
+@export var p1_score_label : Label = null
+@export var p2_score_label : Label = null
+
 @export var neutral_emoji: TextureRect = null
 @export var smile_emoji: TextureRect = null
 @export var laugh_emoji: TextureRect = null
@@ -27,6 +30,8 @@ func _process(delta):
 		else:
 			p1_bar.value = love
 			p2_bar.value = 0.0
+		p1_score_label.text = str(game_state.p1_score)
+		p2_score_label.text = str(game_state.p2_score)
 
 func _show_correct_emoji():
 	neutral_emoji.visible = false
