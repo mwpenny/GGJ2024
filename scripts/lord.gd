@@ -17,7 +17,7 @@ enum AIState {
 	PRE_CHASE,
 	CHASE,
 	TARGET_GROUND_POUND,
-	GROUND_POUND,
+	GROUND_POUND
 }
 
 const GROUND_POUND_PHASE_COUNT = 5
@@ -68,7 +68,7 @@ func _process(delta):
 		_do_ground_pound_target(delta)
 	elif state_machine == AIState.GROUND_POUND:
 		_do_ground_pound(delta)
-	
+
 	_handle_laughter()
 
 func _reset_animations():
@@ -151,7 +151,9 @@ func _do_chase(delta):
 	if follow_target != null:
 		_face_follow_target()
 	
-	player_love += follow_target.score_mult * CHASE_LOVE_DECAY_MULT
+	# HACK
+	if follow_target != fart_target:
+		player_love += follow_target.score_mult * CHASE_LOVE_DECAY_MULT
 	if state_timer <= 0:
 		_change_state(AIState.RETURN_TO_CENTER)
 
@@ -274,6 +276,20 @@ func finish_targeting():
 
 
 func _on_player_farted(player):
+	if fart_target:
+		if follow_target == fart_target:
+			follow_target = null
+		fart_target.queue_free()
+		fart_target = null
+
 	player_love += player.score_mult * 10
 
-	# TODO: laugh and follow
+	# HACK
+	var target_indicator = Node3D.new()
+	target_indicator.global_position = player.global_position
+	#target_indicator.score_mult = player.score_mult
+	get_parent().add_child(target_indicator)
+
+	# Double HACK
+	fart_target = target_indicator
+	follow_target = fart_target
