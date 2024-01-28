@@ -50,7 +50,7 @@ func _get_move_direction():
 
 func _face_direction_xz(direction):
 	var direction_xz = Vector3(direction.x, 0, direction.z)
-	if direction_xz != Vector3.ZERO:
+	if direction_xz:
 		direction_xz.y = 0
 		self.basis = Basis.looking_at(direction_xz, Vector3.UP, true)
 
