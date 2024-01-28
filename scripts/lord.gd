@@ -21,7 +21,7 @@ enum AIState {
 }
 
 const GROUND_POUND_PHASE_COUNT = 5
-const CHASE_LOVE_DECAY_MULT = 0.01 
+const CHASE_LOVE_DECAY_MULT = 0.04 
 const SCOOT_SPEED = 0.6
 const WALK_SPEED = 1.0
 const RUN_SPEED = 3.5
