@@ -1,14 +1,19 @@
-[gd_scene load_steps=40 format=3 uid="uid://cklaqgwvvfiyf"]
+[gd_scene load_steps=41 format=3 uid="uid://cklaqgwvvfiyf"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bdw3y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1prp"]
-albedo_color = Color(0.0313726, 0.517647, 0.321569, 1)
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.027451, 0.486275, 0.298039, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_hkuj6"]
 material = SubResource("StandardMaterial3D_k1prp")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cc3w"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.878431, 0.294118, 0.517647, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_v8g7j"]
@@ -18,6 +23,8 @@ bottom_radius = 0.35
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_any5a"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.878431, 0.294118, 0.517647, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_c3pvv"]
@@ -26,6 +33,8 @@ radius = 0.125
 height = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0j4m2"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.878431, 0.294118, 0.517647, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fff3g"]
@@ -35,6 +44,8 @@ bottom_radius = 0.12
 height = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bldjd"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.733333, 0.729412, 0.156863, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_lb553"]
@@ -43,6 +54,8 @@ radius = 0.1
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mjwl"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.0862745, 0.333333, 0.980392, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_51nfl"]
@@ -51,6 +64,8 @@ radius = 0.1
 height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66psj"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.980392, 0.0901961, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_154hr"]
@@ -58,7 +73,13 @@ material = SubResource("StandardMaterial3D_66psj")
 radius = 0.1
 height = 0.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkxdx"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+
 [sub_resource type="SphereMesh" id="SphereMesh_a5d1k"]
+material = SubResource("StandardMaterial3D_wkxdx")
 radius = 0.063
 height = 0.125
 
@@ -308,6 +329,8 @@ _data = {
 states/Start/position = Vector2(281, 97.75)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02gxn"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.87451, 0, 0.141176, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0nu81"]
@@ -317,6 +340,8 @@ bottom_radius = 0.35
 height = 0.75
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uw2f2"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.623529, 0.239216, 0.196078, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e4or4"]
@@ -333,6 +358,8 @@ radius = 0.15
 height = 0.65
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_twbcp"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.87451, 0, 0.141176, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lrqcg"]
@@ -341,6 +368,8 @@ radius = 0.1
 height = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1l7xj"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.0313726, 0.517647, 0.321569, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_xv8y0"]
@@ -579,5 +608,5 @@ mesh = SubResource("SphereMesh_xv8y0")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48669, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81929, 0)
 shape = SubResource("CapsuleShape3D_3r2l4")

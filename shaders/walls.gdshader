@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_disabled;
+render_mode unshaded, cull_disabled;
 
 uniform float wall_min_height = 3.0;
 uniform vec4 base_color : source_color = vec4(0, 0.15, 0.2, 0.45);
