@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://psvs405lna5e"]
+[gd_scene load_steps=23 format=3 uid="uid://psvs405lna5e"]
 
 [ext_resource type="Script" path="res://scripts/arena.gd" id="1_jqia0"]
 [ext_resource type="Shader" path="res://shaders/platform.gdshader" id="2_s6m76"]
@@ -166,10 +166,6 @@ spot_angle = 75.14
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 7.84236, 0)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-
-[connection signal="death" from="Player1" to="." method="_on_player_death"]
-[connection signal="death" from="Player2" to="." method="_on_player_death"]
-[connection signal="body_exited" from="Lord" to="Lord" method="_on_body_exited"]
 mass = 30.0
 
 [node name="Balls" type="Node3D" parent="."]
@@ -180,4 +176,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3548, 4.082, 2.08165e-12)
 [node name="BallSpawnTimer" type="Timer" parent="."]
 wait_time = 0.5
 
+[connection signal="death" from="Player1" to="." method="_on_player_death"]
+[connection signal="death" from="Player2" to="." method="_on_player_death"]
+[connection signal="body_exited" from="Lord" to="Lord" method="_on_body_exited"]
 [connection signal="timeout" from="BallSpawnTimer" to="." method="spawn_falling_ball"]
