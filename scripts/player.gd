@@ -13,6 +13,7 @@ const PlayerIndicator = preload("res://scripts/player_indicator.gd")
 @export var fart_particles : GPUParticles3D
 
 signal death(player)
+signal farted(player)
 
 var game_state = null
 var input_prefix = ""
@@ -133,6 +134,7 @@ func _process_actions():
 	if fart_timer <= 0 and Input.is_action_just_pressed(_get_input_name("fart")):
 		fart_timer = FART_TIME
 		fart_particles.emitting = true
+		farted.emit(self)
 
 func _face_direction_xz(direction):
 	var direction_xz = Vector3(direction.x, 0, direction.z)

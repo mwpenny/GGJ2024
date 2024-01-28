@@ -37,6 +37,7 @@ var state_timer: float = THINK_TIME
 var movement_speed = 0
 var player_love = 0.0
 var follow_target = null
+var fart_target = null
 var normalized_movement_vector = Vector2(0,1)
 var await_scoot_timer = SCOOT_WAIT_TIME
 var scoot_count = 0
@@ -270,3 +271,9 @@ func _target_ground_pound():
 func finish_targeting():
 	ground_pound_targeting = false
 	_change_state(AIState.GROUND_POUND)
+
+
+func _on_player_farted(player):
+	player_love += player.score_mult * 10
+
+	# TODO: laugh and follow
