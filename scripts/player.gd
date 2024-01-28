@@ -25,7 +25,7 @@ const MAX_VELOCITY = 25
 const KILL_PLANE_HEIGHT = -30
 
 const INVINCIBILITY_TIME = 2
-const FART_TIME = 5
+const FART_TIME = 3
 
 const GRAVITY = 70
 const JUMP_IMPULSE = 20
