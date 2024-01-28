@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx05nf16x7jmg"]
+[gd_scene load_steps=7 format=3 uid="uid://cx05nf16x7jmg"]
 
 [ext_resource type="PackedScene" uid="uid://psvs405lna5e" path="res://scenes/arena.tscn" id="1_muemp"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_ch8o7"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="2_eeqpi"]
+[ext_resource type="Texture2D" uid="uid://8grbtod2menk" path="res://textures/love_progress_p1.png" id="3_oi6g0"]
+[ext_resource type="Texture2D" uid="uid://bs70qtk8ouhru" path="res://textures/love_progress_p2.png" id="4_42s45"]
+[ext_resource type="Texture2D" uid="uid://d0x12c3ekicfs" path="res://textures/laugh_emoji.png" id="5_5k66o"]
 
 [node name="UIRoot" type="Control"]
 layout_mode = 3
@@ -28,13 +32,65 @@ render_target_update_mode = 4
 
 [node name="World" parent="GameViewport/SubViewport" instance=ExtResource("1_muemp")]
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("p1_bar", "p2_bar")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_eeqpi")
+p1_bar = NodePath("VBox/CenterContainer/HBoxContainer/P1Bar")
+p2_bar = NodePath("VBox/CenterContainer/HBoxContainer/P2Bar")
+
+[node name="VBox" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/VBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBox/CenterContainer"]
+layout_mode = 2
+
+[node name="LeftFiller" type="Control" parent="HUD/VBox/CenterContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="P1Bar" type="TextureProgressBar" parent="HUD/VBox/CenterContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 50.0
+step = 0.0
+fill_mode = 1
+texture_progress = ExtResource("3_oi6g0")
+
+[node name="SmallSpacer" type="Control" parent="HUD/VBox/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+
+[node name="P2Bar" type="TextureProgressBar" parent="HUD/VBox/CenterContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 50.0
+step = 0.0
+texture_progress = ExtResource("4_42s45")
+
+[node name="RightFiller" type="Control" parent="HUD/VBox/CenterContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HUD/VBox/CenterContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("5_5k66o")
+expand_mode = 3
 
 [node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("start_button")]
 layout_mode = 1
