@@ -29,6 +29,7 @@ var follow_target = null
 var normalized_movement_vector = Vector2(0,1)
 var await_scoot_timer = SCOOT_WAIT_TIME
 var scoot_count = 0
+var collisions = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -145,6 +146,21 @@ func _integrate_forces(_state):
 	
 	linear_velocity = Vector3(normalized_movement_vector.x, -1, normalized_movement_vector.y) * movement_speed
 
+	_apply_collisions()
+
+func _apply_collisions():
+	for body in collisions:
+		if body != game_state.player_one and body != game_state.player_two:
+			continue
+
+		var mass_ratio = mass / body.mass
+		var knockback_vector = Vector3(
+			linear_velocity.x,
+			5,
+			linear_velocity.y
+		)
+		body.apply_knockback(knockback_vector * mass_ratio)
+
 func _end_scoot_animation():
 	awaiting_scoot = true
 	await_scoot_timer = SCOOT_WAIT_TIME
@@ -172,12 +188,9 @@ func _handle_laughter():
 
 
 func _on_body_entered(body):
-	if body == game_state.player_one or body == game_state.player_two:
-		var mass_ratio = mass / body.mass
-		var knockback_vector = Vector3(
-			linear_velocity.x,
-			5,
-			linear_velocity.y
-		)
+	if not collisions.has(body):
+		collisions.append(body)
 
-		body.velocity += knockback_vector * mass_ratio
+func _on_body_exited(body):
+	if collisions.has(body):
+		collisions.erase(body)

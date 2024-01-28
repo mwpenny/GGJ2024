@@ -22,11 +22,15 @@ const FRICTION = 60
 const MAX_VELOCITY = 25
 const KILL_PLANE_HEIGHT = -30
 
+const INVINCIBILITY_TIME = 2
+
 const GRAVITY = 70
 const JUMP_IMPULSE = 20
 
 # 1.0 for player one, -1.0 for player two
 var score_mult = 0
+
+var invincibility_timer = 0
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -50,8 +54,11 @@ func _physics_process(delta):
 		return
 
 	if is_dead():
-		death.emit(self)
+		kill()
 		return
+
+	_tick_timers(delta)
+	_update_visibility()
 
 	var move_direction = _get_move_direction()
 	_face_direction_xz(move_direction)
@@ -72,6 +79,31 @@ func is_running():
 
 func is_dead():
 	return global_position.y < KILL_PLANE_HEIGHT
+
+func apply_knockback(knockback_velocity):
+	if not _is_knockback_disabled():
+		velocity += knockback_velocity
+		_start_knockback_cooldown()
+
+func kill():
+	velocity = Vector3.ZERO
+	invincibility_timer = 0
+
+	death.emit(self)
+	_start_knockback_cooldown()
+
+func _is_knockback_disabled():
+	return invincibility_timer > 0
+
+func _start_knockback_cooldown():
+	invincibility_timer = INVINCIBILITY_TIME
+
+func _tick_timers(delta):
+	if invincibility_timer > 0:
+		invincibility_timer = move_toward(invincibility_timer, 0, delta)
+
+func _update_visibility():
+	visible = (int(invincibility_timer * 1000) % 2) == 0
 
 func _get_input_name(name):
 	return input_prefix + name

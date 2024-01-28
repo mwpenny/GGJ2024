@@ -168,3 +168,4 @@ axis_lock_angular_z = true
 
 [connection signal="death" from="Player1" to="." method="_on_player_death"]
 [connection signal="death" from="Player2" to="." method="_on_player_death"]
+[connection signal="body_exited" from="Lord" to="Lord" method="_on_body_exited"]
