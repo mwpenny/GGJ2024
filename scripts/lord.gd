@@ -4,20 +4,27 @@ extends RigidBody3D
 @export var animation_tree : AnimationTree = null
 @export var laugh_particles : GPUParticles3D
 
+@export var target_indicator_scene : PackedScene
+
 var game_state = null
 
 enum AIState {
 	THINK,
+	RETURN_TO_CENTER,
+	PRE_CHASE,
 	CHASE,
+	TARGET_GROUND_POUND,
 	GROUND_POUND,
 }
 
+const GROUND_POUND_PHASE_COUNT = 5
 const CHASE_LOVE_DECAY_MULT = 0.01 
 const SCOOT_SPEED = 0.6
 const WALK_SPEED = 1.0
 const RUN_SPEED = 3.5
 const THINK_TIME = 2.0
 const SCOOT_WAIT_TIME = 1.0
+const MAX_ROTATION = 0.9
 
 var last_scoot_was_left: bool = false
 var awaiting_scoot: bool = true
@@ -31,6 +38,10 @@ var await_scoot_timer = SCOOT_WAIT_TIME
 var scoot_count = 0
 var collisions = []
 
+var ground_pound_count = 0
+var ground_pound_in_air = false
+var ground_pound_targeting = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_state = get_node("/root/GameState")
@@ -42,8 +53,14 @@ func _process(delta):
 	
 	if state_machine == AIState.THINK:
 		_do_think(delta)
+	if state_machine == AIState.RETURN_TO_CENTER:
+		_do_return_to_center(delta)
+	elif state_machine == AIState.PRE_CHASE:
+		_do_pre_chase(delta)
 	elif state_machine == AIState.CHASE:
 		_do_chase(delta)
+	elif state_machine == AIState.TARGET_GROUND_POUND:
+		_do_ground_pound_target(delta)
 	elif state_machine == AIState.GROUND_POUND:
 		_do_ground_pound(delta)
 	
@@ -65,10 +82,12 @@ func _change_state(state):
 	state_machine = state
 	if state_machine == AIState.THINK:
 		state_timer = THINK_TIME
+	elif state_machine == AIState.PRE_CHASE:
+		_update_follow_target()
+		state_timer = 3.0
 	elif state_machine == AIState.CHASE:
 		awaiting_scoot = true
 		state_timer = 10.0
-		_update_follow_target()
 	elif state_machine == AIState.GROUND_POUND:
 		state_timer = 10.0
 
@@ -77,8 +96,8 @@ func _do_think(delta):
 	state_timer -= delta
 	if state_timer <= 0:
 		var next_states = [
-			AIState.CHASE,
-			# AIState.GROUND_POUND,
+			AIState.PRE_CHASE,
+			AIState.TARGET_GROUND_POUND,
 		]
 		_change_state(
 			next_states[randi() % len(next_states)]
@@ -135,6 +154,11 @@ func _face_follow_target():
 	look_at.y = visuals_root.global_position.y
 	visuals_root.global_transform = visuals_root.global_transform.looking_at(look_at)
 
+func _do_ground_pound_target(delta):
+	if not ground_pound_targeting:
+		_target_ground_pound()
+		ground_pound_targeting = true
+
 func _do_ground_pound(delta):
 	_change_state(AIState.THINK)
 
@@ -186,7 +210,6 @@ func _handle_laughter():
 	animation_tree.set("parameters/conditions/is_neutral", not is_laughing)
 	laugh_particles.emitting = is_laughing
 
-
 func _on_body_entered(body):
 	if not collisions.has(body):
 		collisions.append(body)
@@ -194,3 +217,28 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if collisions.has(body):
 		collisions.erase(body)
+
+func _do_return_to_center(_delta):
+	pass
+
+func _do_pre_chase(_delta):
+	_rotate_towards_follow_target(_delta)
+	state_timer -= _delta
+	if state_timer <= 0:
+		_change_state(AIState.CHASE)
+
+func _rotate_towards_follow_target(_delta):
+	#TODO slow down
+	_face_follow_target()
+
+func _target_ground_pound():
+	_update_follow_target()
+	var target_indicator = target_indicator_scene.instantiate()
+	get_parent().add_child(target_indicator)
+	target_indicator.global_position = follow_target.global_position
+	target_indicator.global_position.y += 1.0 # HACK
+	
+func finish_targeting():
+	ground_pound_targeting = false
+	_change_state(AIState.GROUND_POUND)
+>>>>>>> 8ec42ef (lord behavior changes, rotate before charge, target)
