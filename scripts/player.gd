@@ -87,10 +87,9 @@ func apply_knockback(knockback_velocity):
 
 func kill():
 	velocity = Vector3.ZERO
-	invincibility_timer = 0
+	_start_knockback_cooldown()
 
 	death.emit(self)
-	_start_knockback_cooldown()
 
 func _is_knockback_disabled():
 	return invincibility_timer > 0

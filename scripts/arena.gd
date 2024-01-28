@@ -24,4 +24,4 @@ func _on_player_death(player):
 	else:
 		print("Player 2 died")
 
-	player.global_position = Vector3(0, 10, 0)
+	player.global_position = Vector3(player.score_mult * -3, 10, 0)
