@@ -55,6 +55,12 @@ func init(player_num):
 	# print("Player %d has %f multiplier." % [player_num, score_mult])
 	input_prefix = "p%d_" % player_num
 
+func is_moving():
+	return velocity.length() > 0
+
+func is_running():
+	return velocity.length() > (MAX_VELOCITY / 2)
+
 func _get_input_name(name):
 	return input_prefix + name
 
