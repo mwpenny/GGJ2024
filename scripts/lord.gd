@@ -174,4 +174,10 @@ func _handle_laughter():
 func _on_body_entered(body):
 	if body == game_state.player_one or body == game_state.player_two:
 		var mass_ratio = mass / body.mass
-		body.velocity += linear_velocity * mass_ratio
+		var knockback_vector = Vector3(
+			linear_velocity.x,
+			5,
+			linear_velocity.y
+		)
+
+		body.velocity += knockback_vector * mass_ratio

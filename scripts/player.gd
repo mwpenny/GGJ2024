@@ -15,7 +15,7 @@ signal death(player)
 
 var game_state = null
 var input_prefix = ""
-var mass = 3.0
+var mass = 25.0
 
 const ACCELERATION = 175
 const FRICTION = 60
@@ -95,14 +95,19 @@ func _face_direction_xz(direction):
 func _get_velocity_vector(direction, delta):
 	var acceleration = direction * ACCELERATION * delta
 	var friction = FRICTION * delta
-	var velocity_vector = Vector3(
-		move_toward(velocity.x + acceleration.x, 0, friction),
-		move_toward(velocity.y, -MAX_VELOCITY, GRAVITY * delta),
-		move_toward(velocity.z + acceleration.z, 0, friction)
-	)
+
+	var velocity_vector = Vector3(velocity)
+
+	if velocity_vector.length() < MAX_VELOCITY:
+		velocity_vector.x += acceleration.x
+		velocity_vector.z += acceleration.z
+
+	velocity_vector.x = move_toward(velocity_vector.x, 0, friction)
+	velocity_vector.y = move_toward(velocity_vector.y, -MAX_VELOCITY, GRAVITY * delta)
+	velocity_vector.z = move_toward(velocity_vector.z, 0, friction)
 
 	# TODO: analog jump
 	if direction.y > 0 and is_on_floor():
 		velocity_vector.y = JUMP_IMPULSE
 
-	return velocity_vector.limit_length(MAX_VELOCITY)
+	return velocity_vector
