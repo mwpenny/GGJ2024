@@ -81,6 +81,7 @@ p2_jump={
 
 3d_physics/layer_1="Static"
 3d_physics/layer_2="Dynamic"
+3d_physics/layer_3="Non-player"
 
 [rendering]
 

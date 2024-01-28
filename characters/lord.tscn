@@ -782,6 +782,8 @@ graph_offset = Vector2(154, -143)
 
 [node name="Lord" type="RigidBody3D" node_paths=PackedStringArray("visuals_root", "animation_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09288, 0)
+collision_layer = 6
+collision_mask = 7
 axis_lock_angular_y = true
 mass = 40.0
 center_of_mass_mode = 1

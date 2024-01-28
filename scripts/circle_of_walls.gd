@@ -90,6 +90,9 @@ func _reset():
 		cs.set_shape(cps)
 
 		var wall = StaticBody3D.new()
+		wall.set_collision_layer_value(1, false)  # Static
+		wall.set_collision_layer_value(2, false)  # Dynamic
+		wall.set_collision_layer_value(3, true)   # Non-player
 		wall.add_child(cs)
 		add_child(wall)
 	
