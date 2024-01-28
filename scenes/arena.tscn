@@ -179,6 +179,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.738)
 
 [connection signal="death" from="Player1" to="." method="_on_player_death"]
 [connection signal="farted" from="Player1" to="Lord" method="_on_player_farted"]
+[connection signal="knocked_back" from="Player1" to="Lord" method="_on_player_knocked_back"]
 [connection signal="death" from="Player2" to="." method="_on_player_death"]
 [connection signal="farted" from="Player2" to="Lord" method="_on_player_farted"]
+[connection signal="knocked_back" from="Player2" to="Lord" method="_on_player_knocked_back"]
 [connection signal="body_exited" from="Lord" to="Lord" method="_on_body_exited"]

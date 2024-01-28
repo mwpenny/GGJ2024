@@ -14,6 +14,7 @@ const PlayerIndicator = preload("res://scripts/player_indicator.gd")
 
 signal death(player)
 signal farted(player)
+signal knocked_back(player)
 
 var game_state = null
 var input_prefix = ""
@@ -91,6 +92,7 @@ func apply_knockback(knockback_velocity):
 	if not _is_knockback_disabled():
 		velocity += knockback_velocity
 		_start_knockback_cooldown()
+		knocked_back.emit(self)
 
 func kill():
 	velocity = Vector3.ZERO

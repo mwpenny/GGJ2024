@@ -293,3 +293,13 @@ func _on_player_farted(player):
 	# Double HACK
 	fart_target = target_indicator
 	follow_target = fart_target
+
+
+func _on_player_knocked_back(player):
+	var other_player = null
+	if player == game_state.player_one:
+		other_player = game_state.player_two
+	else:
+		other_player = game_state.player_one
+
+	player_love += other_player.score_mult * 10
