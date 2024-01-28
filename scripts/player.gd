@@ -134,7 +134,7 @@ func _get_move_direction():
 	return Vector3(x_axis, jump, z_axis).normalized()
 
 func _process_actions():
-	if fart_timer <= 0 and Input.is_action_just_pressed(_get_input_name("fart")):
+	if fart_timer <= 0 and Input.is_action_just_pressed(_get_input_name("fart")) and not _is_knockback_disabled():
 		_do_fart()
 
 func _do_fart():
