@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cklaqgwvvfiyf" path="res://characters/player.tscn" id="5_vckah"]
 [ext_resource type="Shader" path="res://shaders/player_indicator.gdshader" id="6_tp5ud"]
 [ext_resource type="PackedScene" uid="uid://cri6eyis8mjhe" path="res://characters/lord.tscn" id="6_veo1w"]
+[ext_resource type="PackedScene" uid="uid://dv640qjdlmdk7" path="res://scenes/ball.tscn" id="7_lvwvp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7dk6a"]
 render_priority = 0
@@ -169,3 +170,14 @@ axis_lock_angular_z = true
 [connection signal="death" from="Player1" to="." method="_on_player_death"]
 [connection signal="death" from="Player2" to="." method="_on_player_death"]
 [connection signal="body_exited" from="Lord" to="Lord" method="_on_body_exited"]
+mass = 30.0
+
+[node name="Balls" type="Node3D" parent="."]
+
+[node name="Ball" parent="Balls" instance=ExtResource("7_lvwvp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3548, 4.082, 2.08165e-12)
+
+[node name="BallSpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="BallSpawnTimer" to="." method="spawn_falling_ball"]

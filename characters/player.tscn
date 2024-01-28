@@ -1,6 +1,7 @@
 [gd_scene load_steps=55 format=3 uid="uid://cklaqgwvvfiyf"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bdw3y"]
+[ext_resource type="PackedScene" uid="uid://dv640qjdlmdk7" path="res://scenes/ball.tscn" id="2_1tyfk"]
 [ext_resource type="PackedScene" uid="uid://bpjuqvy053728" path="res://indicators/player_indicator.tscn" id="2_kl1gp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1prp"]
@@ -320,9 +321,91 @@ tracks/13/interp = 2
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, -0.0353001, -0.0453753, -0.0581854, 0.996649, 1, 1, 0.638231, -0.0726128, -0.0131083, 0.766301)
 
+[sub_resource type="Animation" id="Animation_xe2wu"]
+resource_name = "juggle"
+length = 3.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HeadPivot/Head/Hat/Tube3/Tube base/HatEndJoint3/Tube end/Ball")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Juggling/Ball:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.01269, -0.25, 0, 0.25, 0, 1.64806, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5, 2.5, 3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Juggling/Ball:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.3, 14.5, 4.8868, -0.25, 0, 0.25, 0, 0.486355, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5, 2.5, 3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Juggling/Ball:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5, 2.5, 3)
+}
+
+[sub_resource type="Animation" id="Animation_2puev"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Juggling/Ball:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Juggling/Ball:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Juggling/Ball:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_67df4"]
 _data = {
+"RESET": SubResource("Animation_2puev"),
 "idle": SubResource("Animation_34n48"),
+"juggle": SubResource("Animation_xe2wu"),
 "run": SubResource("Animation_psaia")
 }
 
@@ -529,7 +612,7 @@ mesh = SubResource("CylinderMesh_fff3g")
 skeleton = NodePath("../../../../..")
 
 [node name="Ball" type="MeshInstance3D" parent="Root/HeadPivot/Head/Hat/Tube3/Tube base/HatEndJoint3/Tube end"]
-transform = Transform3D(1, -1.86265e-09, 2.98023e-08, 2.38419e-07, 1, 0, -5.96046e-08, -7.45058e-09, 0.999999, -0.00142968, 0.226619, -0.00375152)
+transform = Transform3D(1, -1.86265e-09, 2.98023e-08, 2.38419e-07, 1, 0, -5.96046e-08, -7.45058e-09, 0.999999, 0, 0, 0)
 mesh = SubResource("SphereMesh_154hr")
 
 [node name="Eye1" type="MeshInstance3D" parent="Root/HeadPivot/Head"]
@@ -678,6 +761,12 @@ skeleton = NodePath("")
 transform = Transform3D(0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 0, 0, 1, -0.00371718, -0.306571, 0)
 mesh = SubResource("SphereMesh_xv8y0")
 skeleton = NodePath("")
+
+[node name="Juggling" type="Node3D" parent="Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01029, 0, 1.0355)
+
+[node name="Ball" parent="Root/Juggling" instance=ExtResource("2_1tyfk")]
+constant_force = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.826, 0)

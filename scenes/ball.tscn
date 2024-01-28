@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv640qjdlmdk7"]
+
+[ext_resource type="Script" path="res://scenes/juggle_ball.gd" id="1_1oc0s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_68gjl"]
+bounce = 0.35
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lqui0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_beejp"]
+
+[node name="Ball" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_68gjl")
+script = ExtResource("1_1oc0s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+shape = SubResource("SphereShape3D_lqui0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("SphereMesh_beejp")
+skeleton = NodePath("../..")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
