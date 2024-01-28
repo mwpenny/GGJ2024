@@ -10,6 +10,7 @@ const PlayerIndicator = preload("res://scripts/player_indicator.gd")
 @export var clothing_meshes : Array[MeshInstance3D]
 @export var hat_meshes : Array[MeshInstance3D]
 @export var indicator : MeshInstance3D
+@export var fart_particles : GPUParticles3D
 
 signal death(player)
 
@@ -23,6 +24,7 @@ const MAX_VELOCITY = 25
 const KILL_PLANE_HEIGHT = -30
 
 const INVINCIBILITY_TIME = 2
+const FART_TIME = 5
 
 const GRAVITY = 70
 const JUMP_IMPULSE = 20
@@ -31,6 +33,7 @@ const JUMP_IMPULSE = 20
 var score_mult = 0
 
 var invincibility_timer = 0
+var fart_timer = 0
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -62,6 +65,8 @@ func _physics_process(delta):
 
 	var move_direction = _get_move_direction()
 	_face_direction_xz(move_direction)
+
+	_process_actions()
 
 	velocity = _get_velocity_vector(move_direction, delta)
 	move_and_slide()
@@ -100,6 +105,8 @@ func _start_knockback_cooldown():
 func _tick_timers(delta):
 	if invincibility_timer > 0:
 		invincibility_timer = move_toward(invincibility_timer, 0, delta)
+	if fart_timer > 0:
+		fart_timer = move_toward(fart_timer, 0, delta)
 
 func _update_visibility():
 	visible = (int(invincibility_timer * 1000) % 2) == 0
@@ -111,11 +118,21 @@ func _get_move_direction():
 	# TODO: maybe something clever needs to happen with detecting devices and
 	# using mouse and keyboard for one of the players
 
-	var x_axis = Input.get_axis(_get_input_name("move_left"), _get_input_name("move_right"))
-	var z_axis = Input.get_axis(_get_input_name("move_up"), _get_input_name("move_down"))
+	var left = Input.get_action_strength(_get_input_name("move_left"))
+	var right = Input.get_action_strength(_get_input_name("move_right"))
+	var up = Input.get_action_strength(_get_input_name("move_up"))
+	var down = Input.get_action_strength(_get_input_name("move_down"))
+
+	var x_axis = right - left
+	var z_axis = down - up
 	var jump = 1 if Input.is_action_just_pressed(_get_input_name("jump")) else 0
 
 	return Vector3(x_axis, jump, z_axis).normalized()
+
+func _process_actions():
+	if fart_timer <= 0 and Input.is_action_just_pressed(_get_input_name("fart")):
+		fart_timer = FART_TIME
+		fart_particles.emitting = true
 
 func _face_direction_xz(direction):
 	var direction_xz = Vector3(direction.x, 0, direction.z)
