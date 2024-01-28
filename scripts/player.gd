@@ -25,7 +25,8 @@ const JUMP_IMPULSE = 20
 var score_mult = 0
 
 func _ready():
-	game_state = get_node("/root/GameState")
+	if not Engine.is_editor_hint():
+		game_state = get_node("/root/GameState")
 	# Override material colors
 	if clothing_material and clothing_meshes:
 		for mesh in clothing_meshes:
