@@ -11,12 +11,15 @@ const PlayerIndicator = preload("res://scripts/player_indicator.gd")
 @export var hat_meshes : Array[MeshInstance3D]
 @export var indicator : MeshInstance3D
 
+signal death(player)
+
 var game_state = null
 var input_prefix = ""
 
 const ACCELERATION = 175
 const FRICTION = 60
 const MAX_VELOCITY = 25
+const KILL_PLANE_HEIGHT = -30
 
 const GRAVITY = 70
 const JUMP_IMPULSE = 20
@@ -45,6 +48,10 @@ func _physics_process(delta):
 	if not game_state or not game_state.gameplay_enabled:
 		return
 
+	if is_dead():
+		death.emit(self)
+		return
+
 	var move_direction = _get_move_direction()
 	_face_direction_xz(move_direction)
 
@@ -61,6 +68,9 @@ func is_moving():
 
 func is_running():
 	return velocity.length() > (MAX_VELOCITY / 2)
+
+func is_dead():
+	return global_position.y < KILL_PLANE_HEIGHT
 
 func _get_input_name(name):
 	return input_prefix + name

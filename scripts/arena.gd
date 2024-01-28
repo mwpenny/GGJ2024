@@ -16,3 +16,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_player_death(player):
+	# TODO: game end screen
+	if player == game_state.player_one:
+		print("Player 1 died")
+	else:
+		print("Player 2 died")
+
+	player.global_position = Vector3(0, 10, 0)
