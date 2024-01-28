@@ -23,6 +23,7 @@ const ACCELERATION = 175
 const FRICTION = 60
 const MAX_VELOCITY = 25
 const KILL_PLANE_HEIGHT = -30
+const FART_RADIUS = 5
 
 const INVINCIBILITY_TIME = 2
 const FART_TIME = 3
@@ -132,9 +133,23 @@ func _get_move_direction():
 
 func _process_actions():
 	if fart_timer <= 0 and Input.is_action_just_pressed(_get_input_name("fart")):
-		fart_timer = FART_TIME
-		fart_particles.emitting = true
-		farted.emit(self)
+		_do_fart()
+
+func _do_fart():
+	fart_timer = FART_TIME
+	fart_particles.emitting = true
+	farted.emit(self)
+
+	var other_player = null
+	if self == game_state.player_one:
+		other_player = game_state.player_two
+	else:
+		other_player = game_state.player_one
+
+	var distance = abs(global_position.distance_to(other_player.global_position))
+	if distance < FART_RADIUS:
+		var direction = other_player.global_position.normalized()
+		other_player.apply_knockback(Vector3(direction.x * 35, 35, direction.z * 35))
 
 func _face_direction_xz(direction):
 	var direction_xz = Vector3(direction.x, 0, direction.z)
