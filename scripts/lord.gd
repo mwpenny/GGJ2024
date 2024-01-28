@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var laugh_particles : GPUParticles3D
 @export var center_marker : Node3D = null
 @export var south_marker : Node3D = null
+@export var movable_target : Node3D = null
 
 @export var target_indicator_scene : PackedScene
 
@@ -24,6 +25,7 @@ const CHASE_LOVE_DECAY_MULT = 0.01
 const SCOOT_SPEED = 0.6
 const WALK_SPEED = 1.0
 const RUN_SPEED = 3.5
+const TORPEDO_SPEED = 4.3
 const THINK_TIME = 2.0
 const SCOOT_WAIT_TIME = 1.0
 const MAX_ROTATION = 0.9
@@ -156,6 +158,11 @@ func _face_follow_target():
 	look_at.y = visuals_root.global_position.y
 	visuals_root.global_transform = visuals_root.global_transform.looking_at(look_at)
 
+func _face_follow_target_torpedo():
+	var look_at = follow_target.global_position
+	look_at.y = visuals_root.global_position.y
+	visuals_root.global_transform = visuals_root.global_transform.looking_at(look_at).rotated_local(Vector3.LEFT, PI/2.0)
+
 func _face_south_marker():
 	var look_at = south_marker.global_position
 	look_at.y = visuals_root.global_position.y
@@ -167,7 +174,11 @@ func _do_ground_pound_target(delta):
 		ground_pound_targeting = true
 
 func _do_ground_pound(delta):
-	_change_state(AIState.RETURN_TO_CENTER)
+	follow_target = movable_target
+	movement_speed = TORPEDO_SPEED
+	_face_follow_target_torpedo()
+	if global_position.distance_to(follow_target.global_position) < 7.0:
+		_change_state(AIState.RETURN_TO_CENTER)
 
 func _integrate_forces(_state):
 	if follow_target:
@@ -250,6 +261,7 @@ func _target_ground_pound():
 	get_parent().add_child(target_indicator)
 	target_indicator.global_position = follow_target.global_position
 	target_indicator.global_position.y += 1.0 # HACK
+	movable_target.global_position = target_indicator.global_position
 	
 func finish_targeting():
 	ground_pound_targeting = false
