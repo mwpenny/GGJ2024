@@ -143,7 +143,7 @@ func _integrate_forces(_state):
 		var my_xz = Vector2(global_position.x, global_position.z)
 		normalized_movement_vector = other_xz - my_xz
 	
-	linear_velocity = Vector3(normalized_movement_vector.x, 0, normalized_movement_vector.y) * movement_speed
+	linear_velocity = Vector3(normalized_movement_vector.x, -1, normalized_movement_vector.y) * movement_speed
 
 func _end_scoot_animation():
 	awaiting_scoot = true
